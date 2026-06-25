@@ -797,20 +797,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           <div class="hp-bot-r" style="background:none">
             <div style="width:100%;height:100%;background-image:url('assets/Capture d\'écran 2026-06-11 à 15.54.37.png');background-size:cover;background-position:center;border-radius:16px"></div>
           </div>
-          <div class="hp-float f1">
-            <div class="icon-circle" style="background:var(--fr-bg)">📄</div>
-            <div>
-              <h5>Dossier personnalisé</h5>
-              <p>Généré après chaque bac blanc</p>
-            </div>
-          </div>
-          <div class="hp-float f2">
-            <div class="icon-circle" style="background:#ECFDF5">✓</div>
-            <div>
-              <h5>Correction en 12h</h5>
-              <p>Par un prof agrégé</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -829,22 +815,20 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
         <!-- Étape 1 : matière -->
         <div class="bilan-step-lbl">1 · Ta matière</div>
         <div class="bilan-matieres" id="bilan-matieres">
-          <button class="bilan-mat" data-m="francais" onclick="selectBilanMat(this)">✍️ Français</button>
-          <button class="bilan-mat" data-m="philo" onclick="selectBilanMat(this)">∞ Philosophie</button>
-          <button class="bilan-mat" data-m="maths" onclick="selectBilanMat(this)">📐 Mathématiques</button>
-          <button class="bilan-mat" data-m="histoire" onclick="selectBilanMat(this)">🏛️ Histoire-Géo</button>
-          <button class="bilan-mat" data-m="hggsp" onclick="selectBilanMat(this)">🌍 HGGSP</button>
-          <button class="bilan-mat" data-m="ses" onclick="selectBilanMat(this)">📊 SES</button>
-          <button class="bilan-mat" data-m="hlp" onclick="selectBilanMat(this)">📖 HLP</button>
-          <button class="bilan-mat" data-m="svt" onclick="selectBilanMat(this)">🧬 SVT</button>
-          <button class="bilan-mat" data-m="oral" onclick="selectBilanMat(this)">🎤 Oral</button>
+          <button class="bilan-mat" data-m="francais" onclick="selectBilanMat(this)">Français</button>
+          <button class="bilan-mat" data-m="philo" onclick="selectBilanMat(this)">Philosophie</button>
+          <button class="bilan-mat" data-m="maths" onclick="selectBilanMat(this)">Mathématiques</button>
+          <button class="bilan-mat" data-m="histoire" onclick="selectBilanMat(this)">Histoire-Géo</button>
+          <button class="bilan-mat" data-m="hggsp" onclick="selectBilanMat(this)">HGGSP</button>
+          <button class="bilan-mat" data-m="ses" onclick="selectBilanMat(this)">SES</button>
+          <button class="bilan-mat" data-m="hlp" onclick="selectBilanMat(this)">HLP</button>
+          <button class="bilan-mat" data-m="svt" onclick="selectBilanMat(this)">SVT</button>
         </div>
 
         <!-- Étape 2 : copie -->
         <div class="bilan-step-lbl" style="margin-top:24px">2 · Ta copie</div>
         <label class="bilan-drop" id="bilan-drop" for="bilan-file">
           <input type="file" id="bilan-file" accept=".pdf,.jpg,.jpeg,.png,.heic,.doc,.docx" style="display:none" onchange="bilanFilePicked(this)">
-          <div style="font-size:2rem;margin-bottom:6px">📤</div>
           <div id="bilan-drop-text" style="font-weight:700">Clique pour ajouter ta copie</div>
           <div style="font-size:.82rem;color:var(--grey);margin-top:4px">Photo, PDF ou capture — ou colle ton texte ci-dessous</div>
         </label>
@@ -854,8 +838,8 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
         <div class="bilan-step-lbl" style="margin-top:24px">3 · Ton email — pour recevoir ton bilan 📬</div>
         <input type="email" id="bilan-email" class="form-input" placeholder="ton@email.com — ton bilan complet y sera envoyé">
 
-        <button class="btn btn-fr btn-lg" style="width:100%;justify-content:center;margin-top:22px" onclick="genererBilan()">✨ Recevoir mon bilan gratuit</button>
-        <p id="bilan-err" style="color:#DC2626;font-size:.85rem;text-align:center;margin-top:10px;display:none">Choisis une matière et ajoute ta copie 🙂</p>
+        <button class="btn btn-fr btn-lg" style="width:100%;justify-content:center;margin-top:22px" onclick="genererBilan()">Recevoir mon bilan gratuit</button>
+        <p id="bilan-err" style="color:#DC2626;font-size:.85rem;text-align:center;margin-top:10px;display:none">Choisis une matière et ajoute ta copie</p>
       </div>
 
       <!-- Résultat -->
@@ -1075,66 +1059,51 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="reveal">
         <div class="subj-card fr" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border:1.5px solid #FCD34D">
           <span class="subj-badge fr">Français</span>
-          <div class="subj-icon">✍️</div>
           <h3 class="subj-title">Français</h3>
           <p class="subj-desc">Commentaires composés, dissertations, analyses linéaires — coaching individuel et dossier de progression.</p>
-          <div class="subj-link" style="color:var(--fr-d)">S'inscrire au prochain bac blanc de français <span>→</span></div>
+          <div class="subj-link" style="color:var(--fr-d)">S'inscrire</div>
         </div>
         <div class="subj-card ph" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1.5px solid var(--ph-l)">
           <span class="subj-badge ph">Philosophie</span>
-          <div class="subj-icon">∞</div>
           <h3 class="subj-title">Philosophie</h3>
           <p class="subj-desc">Dissertations, explications de texte — maîtrise les auteurs, les attendus du correcteur et le jour J.</p>
-          <div class="subj-link" style="color:var(--ph)">S'inscrire au prochain bac blanc de philo <span>→</span></div>
+          <div class="subj-link" style="color:var(--ph)">S'inscrire</div>
         </div>
         <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:1.5px solid #6EE7B7;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
           <span class="subj-badge" style="background:var(--green);color:white">Maths</span>
-          <div class="subj-icon">📐</div>
           <h3 class="subj-title" style="color:#065F46">Mathématiques</h3>
           <p class="subj-desc">Sujets type bac, exercices de spécialité — entraînement en conditions réelles et correction détaillée.</p>
-          <div class="subj-link" style="color:#065F46">S'inscrire au prochain bac blanc de maths <span>→</span></div>
+          <div class="subj-link" style="color:#065F46">S'inscrire</div>
         </div>
         <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:1.5px solid #93C5FD;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
           <span class="subj-badge" style="background:#2563EB;color:white">Histoire-Géo</span>
-          <div class="subj-icon">🏛️</div>
           <h3 class="subj-title" style="color:#1E3A8A">Histoire-Géo</h3>
           <p class="subj-desc">Compositions, étude de documents — maîtrise les repères et la méthode officielle.</p>
-          <div class="subj-link" style="color:#1E3A8A">S'inscrire <span>→</span></div>
+          <div class="subj-link" style="color:#1E3A8A">S'inscrire</div>
         </div>
         <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);border:1.5px solid #FDBA74;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
           <span class="subj-badge" style="background:#EA580C;color:white">HGGSP</span>
-          <div class="subj-icon">🌍</div>
           <h3 class="subj-title" style="color:#9A3412">HGGSP</h3>
           <p class="subj-desc">Jalons, problématiques géopolitiques — analyse de sources et construction d'arguments.</p>
-          <div class="subj-link" style="color:#9A3412">S'inscrire <span>→</span></div>
+          <div class="subj-link" style="color:#9A3412">S'inscrire</div>
         </div>
         <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1.5px solid #C4B5FD;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
           <span class="subj-badge" style="background:#7C3AED;color:white">SES</span>
-          <div class="subj-icon">📊</div>
           <h3 class="subj-title" style="color:var(--ph)">SES</h3>
           <p class="subj-desc">Raisonnement appuyé sur des données, dissertation économique — lecture de tableaux et mécanismes.</p>
-          <div class="subj-link" style="color:var(--ph)">S'inscrire <span>→</span></div>
+          <div class="subj-link" style="color:var(--ph)">S'inscrire</div>
         </div>
         <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#FDF4FF,#FAE8FF);border:1.5px solid #E879F9;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
           <span class="subj-badge" style="background:#A21CAF;color:white">HLP</span>
-          <div class="subj-icon">📖</div>
           <h3 class="subj-title" style="color:#701A75">HLP</h3>
           <p class="subj-desc">Humanités, littérature et philosophie — essai, textes patrimoniaux et questionnement des idées.</p>
-          <div class="subj-link" style="color:#701A75">S'inscrire <span>→</span></div>
+          <div class="subj-link" style="color:#701A75">S'inscrire</div>
         </div>
         <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:1.5px solid #4ADE80;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
           <span class="subj-badge" style="background:#16A34A;color:white">SVT</span>
-          <div class="subj-icon">🧬</div>
           <h3 class="subj-title" style="color:#14532D">SVT</h3>
           <p class="subj-desc">Sciences de la Vie et de la Terre — exploitation de documents, démarche scientifique et synthèse.</p>
-          <div class="subj-link" style="color:#14532D">S'inscrire <span>→</span></div>
-        </div>
-        <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#FFF1F2,#FFE4E6);border:1.5px solid #FCA5A5;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
-          <span class="subj-badge" style="background:#DC2626;color:white">Oral</span>
-          <div class="subj-icon">🎤</div>
-          <h3 class="subj-title" style="color:#7F1D1D">Oral</h3>
-          <p class="subj-desc">Préparation à l'oral du bac — présentation de l'objet d'étude, gestion du stress, réponses à l'examinateur.</p>
-          <div class="subj-link" style="color:#7F1D1D">S'inscrire <span>→</span></div>
+          <div class="subj-link" style="color:#14532D">S'inscrire</div>
         </div>
       </div>
     </div>
@@ -1219,16 +1188,16 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
     <div class="container">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
         <div class="photo-grid-4 reveal">
-          <div class="pg4-item" style="background-image:url('assets/2ee3fad3-340d-4d52-9ddf-5c5699ae4201.png');background-size:200%;background-position:0% 0%;background-color:#FFF7ED">
+          <div class="pg4-item" style="background-image:url('assets/photo-1.png');background-size:cover;background-position:center;background-color:#FFF7ED">
             <div class="overlay"></div>
           </div>
-          <div class="pg4-item" style="background-image:url('assets/2ee3fad3-340d-4d52-9ddf-5c5699ae4201.png');background-size:200%;background-position:100% 0%;background-color:#F5F3FF">
+          <div class="pg4-item" style="background-image:url('assets/photo-2.png');background-size:cover;background-position:center;background-color:#F5F3FF">
             <div class="overlay"></div>
           </div>
-          <div class="pg4-item" style="background-image:url('assets/2ee3fad3-340d-4d52-9ddf-5c5699ae4201.png');background-size:200%;background-position:0% 100%;background-color:#ECFDF5">
+          <div class="pg4-item" style="background-image:url('assets/photo-3.png');background-size:cover;background-position:center;background-color:#ECFDF5">
             <div class="overlay"></div>
           </div>
-          <div class="pg4-item" style="background-image:url('assets/2ee3fad3-340d-4d52-9ddf-5c5699ae4201.png');background-size:200%;background-position:100% 100%;background-color:#FFFBEB">
+          <div class="pg4-item" style="background-image:url('assets/photo-4.png');background-size:cover;background-position:center;background-color:#FFFBEB">
             <div class="overlay"></div>
           </div>
         </div>
@@ -1316,7 +1285,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
               </div>
             </div>
             <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:10px;font-size:.8rem;color:rgba(255,255,255,.7)">
-              <span style="font-size:1.1rem">🎯</span> Suivie par <strong style="color:#fff">Sophie B.</strong> · Coach agrégée
+              <span style="font-size:1.1rem">🎯</span> Suivie par <strong style="color:#fff">Sophie B.</strong> · Professeure expérimentée
             </div>
           </div>
         </div>
@@ -2005,56 +1974,52 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
         <div class="section-accent sa-ph" style="margin:0 auto 16px"></div>
         <div class="eyebrow" style="color:var(--ph);margin-bottom:12px">Notre équipe</div>
         <h1 class="section-title" style="margin-bottom:16px">Des profs qui connaissent<br><span class="script-accent" style="color:var(--ph)">chaque détail du bac.</span></h1>
-        <p class="body-lg" style="max-width:520px;margin:0 auto">Tous nos coachs sont agrégés, certifiés, ou ont une expérience de correction officielle. Ils savent exactement ce que l'examinateur cherche.</p>
+        <p class="body-lg" style="max-width:520px;margin:0 auto">Tous nos professeurs particuliers sont expérimentés et ont une expérience de correction officielle. Ils savent exactement ce que l'examinateur cherche.</p>
       </div>
       <div class="prof-grid reveal">
         <div class="prof-card">
-          <div class="prof-avatar pa-fr"><span style="color:var(--fr-d)">SB</span></div>
           <div class="prof-info">
             <div class="prof-name">Sophie B.</div>
-            <div class="prof-role">Coach Français · Agrégée</div>
+            <div class="prof-role">Professeure de Français</div>
             <div class="prof-tags"><span class="prof-tag">Commentaire</span><span class="prof-tag">Dissertation</span><span class="prof-tag">Oral</span></div>
             <div class="prof-stats">
-              <div class="ps"><div class="n" style="color:var(--fr)">340</div><div class="l">élèves</div></div>
+              <div class="ps"><div class="n" style="color:var(--fr)">65</div><div class="l">élèves</div></div>
               <div class="ps"><div class="n" style="color:var(--gold)">4.9★</div><div class="l">note</div></div>
               <div class="ps"><div class="n" style="color:var(--green)">+3.8</div><div class="l">pts moy.</div></div>
             </div>
           </div>
         </div>
         <div class="prof-card">
-          <div class="prof-avatar pa-ph"><span style="color:var(--ph)">TM</span></div>
           <div class="prof-info">
             <div class="prof-name">Thomas M.</div>
             <div class="prof-role">Coach Philo · Certifié</div>
             <div class="prof-tags"><span class="prof-tag">Dissertation</span><span class="prof-tag">Explication texte</span></div>
             <div class="prof-stats">
-              <div class="ps"><div class="n" style="color:var(--ph)">220</div><div class="l">élèves</div></div>
+              <div class="ps"><div class="n" style="color:var(--ph)">45</div><div class="l">élèves</div></div>
               <div class="ps"><div class="n" style="color:var(--gold)">4.8★</div><div class="l">note</div></div>
               <div class="ps"><div class="n" style="color:var(--green)">+3.4</div><div class="l">pts moy.</div></div>
             </div>
           </div>
         </div>
         <div class="prof-card">
-          <div class="prof-avatar pa-gold"><span style="color:var(--gold)">CL</span></div>
           <div class="prof-info">
             <div class="prof-name">Clara L.</div>
             <div class="prof-role">Coach Français · Ex-correctrice</div>
             <div class="prof-tags"><span class="prof-tag">Analyse linéaire</span><span class="prof-tag">Méthode</span></div>
             <div class="prof-stats">
-              <div class="ps"><div class="n" style="color:var(--gold)">290</div><div class="l">élèves</div></div>
+              <div class="ps"><div class="n" style="color:var(--gold)">52</div><div class="l">élèves</div></div>
               <div class="ps"><div class="n" style="color:var(--gold)">5.0★</div><div class="l">note</div></div>
               <div class="ps"><div class="n" style="color:var(--green)">+4.1</div><div class="l">pts moy.</div></div>
             </div>
           </div>
         </div>
         <div class="prof-card">
-          <div class="prof-avatar pa-green"><span style="color:var(--green)">NK</span></div>
           <div class="prof-info">
             <div class="prof-name">Nadia K.</div>
             <div class="prof-role">Coach Philo · Docteure</div>
             <div class="prof-tags"><span class="prof-tag">Auteurs</span><span class="prof-tag">Méthodo</span></div>
             <div class="prof-stats">
-              <div class="ps"><div class="n" style="color:var(--green)">180</div><div class="l">élèves</div></div>
+              <div class="ps"><div class="n" style="color:var(--green)">38</div><div class="l">élèves</div></div>
               <div class="ps"><div class="n" style="color:var(--gold)">4.9★</div><div class="l">note</div></div>
               <div class="ps"><div class="n" style="color:var(--green)">+2.9</div><div class="l">pts moy.</div></div>
             </div>
@@ -2100,7 +2065,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           </div>
           <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:28px">
             <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:8px">Une rémunération juste</h3>
-            <p style="font-size:.875rem;color:var(--grey);line-height:1.6">Tu es payé à ta vraie valeur pour chaque correction et chaque coaching. Pas de tarif au rabais : ton expertise d'agrégé, certifié ou correcteur est <strong>reconnue et justement rémunérée</strong>.</p>
+            <p style="font-size:.875rem;color:var(--grey);line-height:1.6">Tu es payé à ta vraie valeur pour chaque correction et chaque coaching. Pas de tarif au rabais : ton expertise de professeur particulier expérimenté est <strong>reconnue et justement rémunérée</strong>.</p>
           </div>
           <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:28px">
             <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:8px">Un revenu en plus grâce à l'affiliation</h3>

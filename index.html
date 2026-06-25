@@ -194,6 +194,59 @@ h2.section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.
 .reveal-delay-1{transition-delay:.1s}
 .reveal-delay-2{transition-delay:.2s}
 .reveal-delay-3{transition-delay:.3s}
+.reveal.zoom{transform:translateY(20px) scale(.96)}
+.reveal.zoom.visible{transform:none}
+
+/* ══════════════════════════════════════════
+   MODERNE / DYNAMIQUE
+══════════════════════════════════════════ */
+/* Compteurs animés */
+.count{display:inline-block;font-variant-numeric:tabular-nums}
+
+/* Badges de note flottants (20/20 etc.) */
+.grade-float{
+  position:absolute;z-index:12;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:74px;height:74px;border-radius:50%;
+  font-family:var(--display);color:#fff;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  animation:floaty 6s ease-in-out infinite;
+  will-change:transform;
+}
+.grade-float .g-num{font-size:1.45rem;line-height:1}
+.grade-float .g-lbl{font-size:.5rem;font-weight:700;letter-spacing:.5px;opacity:.85;margin-top:2px;font-family:var(--body)}
+.grade-float.g1{top:-18px;left:-26px;background:linear-gradient(135deg,#FB923C,#F97316);animation-delay:0s}
+.grade-float.g2{top:38%;right:-30px;background:linear-gradient(135deg,#A78BFA,#7C3AED);animation-delay:1.5s;width:66px;height:66px}
+.grade-float.g3{bottom:36px;left:-22px;background:linear-gradient(135deg,#34D399,#059669);animation-delay:3s;width:60px;height:60px}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
+
+/* Blobs animés en fond du hero */
+.hero-blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;z-index:0;pointer-events:none;will-change:transform}
+.hero-blob.b1{width:420px;height:420px;background:radial-gradient(circle,rgba(249,115,22,.45),transparent 70%);top:-80px;left:-60px;animation:blob1 16s ease-in-out infinite}
+.hero-blob.b2{width:480px;height:480px;background:radial-gradient(circle,rgba(124,58,237,.40),transparent 70%);bottom:-120px;right:-80px;animation:blob2 20s ease-in-out infinite}
+@keyframes blob1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.12)}}
+@keyframes blob2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,-20px) scale(1.08)}}
+.hero .container{position:relative;z-index:1}
+
+/* Parallax photos hero */
+.hero-photos{transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+
+/* Bandeau défilant (marquee) */
+.marquee{overflow:hidden;white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee-track{display:inline-flex;gap:48px;align-items:center;animation:marquee 28s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-item{display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--grey);font-size:.95rem}
+.marquee-item .m-dot{width:6px;height:6px;border-radius:50%;background:var(--fr)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Lift au survol */
+.lift{transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
+.lift:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.12)}
+
+/* Respecte prefers-reduced-motion */
+@media (prefers-reduced-motion:reduce){
+  .grade-float,.hero-blob,.marquee-track{animation:none}
+}
 
 /* ══════════════════════════════════════════
    PHOTO COMPONENTS
@@ -749,6 +802,8 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-blob b1"></div>
+    <div class="hero-blob b2"></div>
     <div class="container">
       <div class="hero-grid">
         <!-- Left -->
@@ -771,15 +826,15 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           </div>
           <div class="hero-stats">
             <div class="hero-stat">
-              <div class="val display" style="color:var(--fr)">100+</div>
+              <div class="val display" style="color:var(--fr)"><span class="count" data-target="100" data-suffix="+">0</span></div>
               <div class="lbl">Élèves accompagnés</div>
             </div>
             <div class="hero-stat">
-              <div class="val display" style="color:var(--ph)">98%</div>
+              <div class="val display" style="color:var(--ph)"><span class="count" data-target="98" data-suffix="%">0</span></div>
               <div class="lbl">Taux de satisfaction</div>
             </div>
             <div class="hero-stat">
-              <div class="val display" style="color:var(--green)">+3,2 pts</div>
+              <div class="val display" style="color:var(--green)"><span class="count" data-target="3.2" data-prefix="+" data-suffix=" pts" data-decimals="1">0</span></div>
               <div class="lbl">Progression moyenne</div>
             </div>
           </div>
@@ -787,6 +842,9 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
 
         <!-- Right photos -->
         <div class="hero-photos">
+          <div class="grade-float g1"><span class="g-num">20</span><span class="g-lbl">/20</span></div>
+          <div class="grade-float g2"><span class="g-num">18</span><span class="g-lbl">/20</span></div>
+          <div class="grade-float g3"><span class="g-num">+4</span><span class="g-lbl">PTS</span></div>
           <div class="hp-main">
             <img src="assets/1db9f495-e6e9-412b-bd0d-a67b178e6f6d.png" alt="Élève en coaching visio" style="width:100%;height:100%;object-fit:cover;object-position:center 30%">
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(30,41,59,.45) 100%);border-radius:20px"></div>
@@ -801,6 +859,33 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
       </div>
     </div>
   </section>
+
+  <!-- BANDEAU DÉFILANT -->
+  <div class="marquee" style="padding:22px 0;background:var(--dark);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)">
+    <div class="marquee-track">
+      <span class="marquee-item" style="color:#fff"><span class="m-dot"></span>Français</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#A78BFA"></span>Philosophie</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#34D399"></span>Mathématiques</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#60A5FA"></span>Histoire-Géo</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#FBBF24"></span>HGGSP</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#F472B6"></span>SES</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#A78BFA"></span>HLP</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#34D399"></span>SVT</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot"></span>Coaching en direct</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#34D399"></span>Correction sous 12h</span>
+      <!-- duplicata pour boucle continue -->
+      <span class="marquee-item" style="color:#fff"><span class="m-dot"></span>Français</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#A78BFA"></span>Philosophie</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#34D399"></span>Mathématiques</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#60A5FA"></span>Histoire-Géo</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#FBBF24"></span>HGGSP</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#F472B6"></span>SES</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#A78BFA"></span>HLP</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#34D399"></span>SVT</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot"></span>Coaching en direct</span>
+      <span class="marquee-item" style="color:#fff"><span class="m-dot" style="background:#34D399"></span>Correction sous 12h</span>
+    </div>
+  </div>
 
   <!-- BILAN GRATUIT D'UNE COPIE -->
   <section class="section" id="bilan-gratuit" style="background:linear-gradient(135deg,#FFF8F0,#F5F3FF);padding-top:56px;padding-bottom:56px">
@@ -1293,10 +1378,10 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
 
       <!-- Bandeau stats -->
       <div class="reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:64px;padding-top:40px;border-top:1px solid rgba(255,255,255,.12)">
-        <div><div style="font-family:var(--display);font-size:2.2rem;color:#FB923C">12h</div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">pour recevoir ta correction</div></div>
+        <div><div style="font-family:var(--display);font-size:2.2rem;color:#FB923C"><span class="count" data-target="12" data-suffix="h">0</span></div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">pour recevoir ta correction</div></div>
         <div><div style="font-family:var(--display);font-size:2.2rem;color:#A78BFA">1-1</div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">coaching individuel en visio</div></div>
-        <div><div style="font-family:var(--display);font-size:2.2rem;color:#2DD4A0">+3,2</div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">pts de progression moyenne</div></div>
-        <div><div style="font-family:var(--display);font-size:2.2rem;color:#FBBF24">100%</div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">rédigé par des profs experts</div></div>
+        <div><div style="font-family:var(--display);font-size:2.2rem;color:#2DD4A0"><span class="count" data-target="3.2" data-prefix="+" data-decimals="1">0</span></div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">pts de progression moyenne</div></div>
+        <div><div style="font-family:var(--display);font-size:2.2rem;color:#FBBF24"><span class="count" data-target="100" data-suffix="%">0</span></div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">rédigé par des profs experts</div></div>
       </div>
     </div>
   </section>
@@ -1983,7 +2068,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
             <div class="prof-role">Professeure de Français</div>
             <div class="prof-tags"><span class="prof-tag">Commentaire</span><span class="prof-tag">Dissertation</span><span class="prof-tag">Oral</span></div>
             <div class="prof-stats">
-              <div class="ps"><div class="n" style="color:var(--fr)">65</div><div class="l">élèves</div></div>
+              <div class="ps"><div class="n" style="color:var(--fr)"><span class="count" data-target="65">0</span></div><div class="l">élèves</div></div>
               <div class="ps"><div class="n" style="color:var(--gold)">4.9★</div><div class="l">note</div></div>
               <div class="ps"><div class="n" style="color:var(--green)">+3.8</div><div class="l">pts moy.</div></div>
             </div>
@@ -1995,7 +2080,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
             <div class="prof-role">Coach Philo · Certifié</div>
             <div class="prof-tags"><span class="prof-tag">Dissertation</span><span class="prof-tag">Explication texte</span></div>
             <div class="prof-stats">
-              <div class="ps"><div class="n" style="color:var(--ph)">45</div><div class="l">élèves</div></div>
+              <div class="ps"><div class="n" style="color:var(--ph)"><span class="count" data-target="45">0</span></div><div class="l">élèves</div></div>
               <div class="ps"><div class="n" style="color:var(--gold)">4.8★</div><div class="l">note</div></div>
               <div class="ps"><div class="n" style="color:var(--green)">+3.4</div><div class="l">pts moy.</div></div>
             </div>
@@ -2007,7 +2092,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
             <div class="prof-role">Coach Français · Ex-correctrice</div>
             <div class="prof-tags"><span class="prof-tag">Analyse linéaire</span><span class="prof-tag">Méthode</span></div>
             <div class="prof-stats">
-              <div class="ps"><div class="n" style="color:var(--gold)">52</div><div class="l">élèves</div></div>
+              <div class="ps"><div class="n" style="color:var(--gold)"><span class="count" data-target="52">0</span></div><div class="l">élèves</div></div>
               <div class="ps"><div class="n" style="color:var(--gold)">5.0★</div><div class="l">note</div></div>
               <div class="ps"><div class="n" style="color:var(--green)">+4.1</div><div class="l">pts moy.</div></div>
             </div>
@@ -2019,7 +2104,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
             <div class="prof-role">Coach Philo · Docteure</div>
             <div class="prof-tags"><span class="prof-tag">Auteurs</span><span class="prof-tag">Méthodo</span></div>
             <div class="prof-stats">
-              <div class="ps"><div class="n" style="color:var(--green)">38</div><div class="l">élèves</div></div>
+              <div class="ps"><div class="n" style="color:var(--green)"><span class="count" data-target="38">0</span></div><div class="l">élèves</div></div>
               <div class="ps"><div class="n" style="color:var(--gold)">4.9★</div><div class="l">note</div></div>
               <div class="ps"><div class="n" style="color:var(--green)">+2.9</div><div class="l">pts moy.</div></div>
             </div>
@@ -2621,6 +2706,7 @@ function gotoPage(id) {
     a.classList.toggle('active', a.dataset.page === id);
   });
   setTimeout(triggerReveal, 80);
+  setTimeout(triggerCounts, 80);
   if (id === 'concept') setTimeout(animateChart, 400);
   if (id === 'espace-prof' && currentProf) setTimeout(initProfDashboard, 100);
   if (id === 'calendrier') setTimeout(()=>renderCalendar('all'), 80);
@@ -2859,6 +2945,45 @@ function triggerReveal() {
   document.querySelectorAll('.page.active .reveal').forEach(r => obs.observe(r));
 }
 
+// ── COMPTEURS ANIMÉS ───────────────────────────────────
+function runCount(el) {
+  const target  = parseFloat(el.dataset.target || '0');
+  const dec      = parseInt(el.dataset.decimals || '0', 10);
+  const prefix   = el.dataset.prefix || '';
+  const suffix   = el.dataset.suffix || '';
+  const dur      = 1400;
+  const start    = performance.now();
+  function frame(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+    const val = (target * eased).toFixed(dec).replace('.', ',');
+    el.textContent = prefix + val + suffix;
+    if (p < 1) requestAnimationFrame(frame);
+    else el.textContent = prefix + target.toFixed(dec).replace('.', ',') + suffix;
+  }
+  requestAnimationFrame(frame);
+}
+function triggerCounts() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { runCount(e.target); obs.unobserve(e.target); }});
+  }, {threshold: 0.5});
+  document.querySelectorAll('.page.active .count').forEach(c => { c.textContent = '0'; obs.observe(c); });
+}
+
+// ── PARALLAX SOURIS (HERO) ─────────────────────────────
+(function heroParallax(){
+  const hero = document.querySelector('.hero');
+  const photos = document.querySelector('.hero-photos');
+  if (!hero || !photos || window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  hero.addEventListener('mousemove', ev => {
+    const r = hero.getBoundingClientRect();
+    const x = (ev.clientX - r.left) / r.width - .5;
+    const y = (ev.clientY - r.top) / r.height - .5;
+    photos.style.transform = `translate(${x*16}px, ${y*16}px)`;
+  });
+  hero.addEventListener('mouseleave', () => { photos.style.transform = 'translate(0,0)'; });
+})();
+
 // ── CHART ANIMATION ──────────────────────────────────
 function animateChart() {
   const heights = {cb1:110, cb2:130, cb3:155, cb4:180};
@@ -2890,8 +3015,8 @@ window.addEventListener('scroll', () => {
 });
 
 // ── INIT ───────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => { triggerReveal(); });
-setTimeout(triggerReveal, 200);
+document.addEventListener('DOMContentLoaded', () => { triggerReveal(); triggerCounts(); });
+setTimeout(() => { triggerReveal(); triggerCounts(); }, 200);
 
 // ══════════════════════════════════════════
 // ESPACE PROF

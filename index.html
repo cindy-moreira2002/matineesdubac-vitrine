@@ -688,6 +688,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
 }
 @media(max-width:768px){
   .subjects-grid,.pricing-cards,.earn-grid,.advantages-grid{grid-template-columns:1fr}
+  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr 1fr !important}
   .pricing-cards{max-width:420px;margin:0 auto}
   .reviews-grid{grid-template-columns:1fr}
   .chart-notes{grid-template-columns:1fr 1fr}
@@ -770,7 +771,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           </div>
           <div class="hero-stats">
             <div class="hero-stat">
-              <div class="val display" style="color:var(--fr)">2 000+</div>
+              <div class="val display" style="color:var(--fr)">100+</div>
               <div class="lbl">Élèves accompagnés</div>
             </div>
             <div class="hero-stat">
@@ -791,10 +792,10 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(30,41,59,.45) 100%);border-radius:20px"></div>
           </div>
           <div class="hp-bot-l" style="background:none">
-            <div style="width:100%;height:100%;background-image:url('assets/2ee3fad3-340d-4d52-9ddf-5c5699ae4201.png');background-size:200%;background-position:0% 0%;border-radius:16px"></div>
+            <div style="width:100%;height:100%;background-image:url('assets/Capture d\'écran 2026-06-11 à 15.54.01.png');background-size:cover;background-position:center;border-radius:16px"></div>
           </div>
           <div class="hp-bot-r" style="background:none">
-            <div style="width:100%;height:100%;background-image:url('assets/2ee3fad3-340d-4d52-9ddf-5c5699ae4201.png');background-size:200%;background-position:100% 0%;border-radius:16px"></div>
+            <div style="width:100%;height:100%;background-image:url('assets/Capture d\'écran 2026-06-11 à 15.54.37.png');background-size:cover;background-position:center;border-radius:16px"></div>
           </div>
           <div class="hp-float f1">
             <div class="icon-circle" style="background:var(--fr-bg)">📄</div>
@@ -806,7 +807,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           <div class="hp-float f2">
             <div class="icon-circle" style="background:#ECFDF5">✓</div>
             <div>
-              <h5>Correction en 48h</h5>
+              <h5>Correction en 12h</h5>
               <p>Par un prof agrégé</p>
             </div>
           </div>
@@ -834,6 +835,9 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           <button class="bilan-mat" data-m="histoire" onclick="selectBilanMat(this)">🏛️ Histoire-Géo</button>
           <button class="bilan-mat" data-m="hggsp" onclick="selectBilanMat(this)">🌍 HGGSP</button>
           <button class="bilan-mat" data-m="ses" onclick="selectBilanMat(this)">📊 SES</button>
+          <button class="bilan-mat" data-m="hlp" onclick="selectBilanMat(this)">📖 HLP</button>
+          <button class="bilan-mat" data-m="svt" onclick="selectBilanMat(this)">🧬 SVT</button>
+          <button class="bilan-mat" data-m="oral" onclick="selectBilanMat(this)">🎤 Oral</button>
         </div>
 
         <!-- Étape 2 : copie -->
@@ -902,7 +906,19 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
       ses: { label:'SES', note:[10,15], leviers:[
         ['Expliciter les mécanismes (pas seulement nommer les notions)','+2 à 3 pts'],
         ['Lire et interpréter correctement les données chiffrées (% vs points de %)','+1 à 2 pts'],
-        ['Exploiter les documents en lien avec l\'argument','+1 pt'] ] }
+        ['Exploiter les documents en lien avec l\'argument','+1 pt'] ] },
+      hlp: { label:'HLP', note:[10,15], leviers:[
+        ['Problématiser la tension entre les deux notions du sujet','+2 à 3 pts'],
+        ['Mobiliser un texte patrimonial précis (auteur + œuvre + argument)','+1 à 2 pts'],
+        ['Soigner la conclusion : retour sur la question initiale + ouverture','+1 pt'] ] },
+      svt: { label:'SVT', note:[10,16], leviers:[
+        ['Structurer chaque argumentation : observation → hypothèse → résultat → conclusion','+2 à 3 pts'],
+        ['Annoter et exploiter précisément les documents (valeurs, unités, tendances)','+1 à 2 pts'],
+        ['Relier les mécanismes biologiques aux notions du programme','+1 pt'] ] },
+      oral: { label:'Oral', note:[11,16], leviers:[
+        ['Construire une ouverture qui valorise le questionnement de l\'examinateur','+2 pts'],
+        ['Articuler chaque réponse en 3 temps : position → argument → exemple','+1 à 2 pts'],
+        ['Maîtriser la présentation de l\'objet d\'étude en 2 min chrono','+1 pt'] ] }
     };
     let bilanMat = null;
     let bilanImg = null, bilanImgType = null;
@@ -1053,23 +1069,72 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
     <div class="container">
       <div class="text-center" style="text-align:center;margin-bottom:40px" class="reveal">
         <div class="section-accent sa-both" style="margin:0 auto 16px"></div>
-        <div class="eyebrow" style="color:var(--grey);margin-bottom:12px">Deux matières. Un seul objectif.</div>
+        <div class="eyebrow" style="color:var(--grey);margin-bottom:12px">Toutes les matières. Un seul objectif.</div>
         <h2 class="section-title reveal">Choisis ta matière,<br>on s'occupe du reste.</h2>
       </div>
-      <div class="subjects-grid reveal">
-        <div class="subj-card fr" onclick="gotoPage('concept')">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="reveal">
+        <div class="subj-card fr" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border:1.5px solid #FCD34D">
           <span class="subj-badge fr">Français</span>
           <div class="subj-icon">✍️</div>
-          <h3 class="subj-title">Slay le Français</h3>
-          <p class="subj-desc">Commentaires composés, dissertations, analyses linéaires — coaching individuel et dossier de progression pour maîtriser chaque exercice.</p>
-          <div class="subj-link">Commencer en Français <span>→</span></div>
+          <h3 class="subj-title">Français</h3>
+          <p class="subj-desc">Commentaires composés, dissertations, analyses linéaires — coaching individuel et dossier de progression.</p>
+          <div class="subj-link" style="color:var(--fr-d)">S'inscrire au prochain bac blanc de français <span>→</span></div>
         </div>
-        <div class="subj-card ph" onclick="gotoPage('concept')">
+        <div class="subj-card ph" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1.5px solid var(--ph-l)">
           <span class="subj-badge ph">Philosophie</span>
           <div class="subj-icon">∞</div>
-          <h3 class="subj-title">Slay la Philo</h3>
-          <p class="subj-desc">Dissertations philo, explications de texte, problématiques — maîtrise les auteurs, les attendus du correcteur et le jour J.</p>
-          <div class="subj-link">Commencer en Philo <span>→</span></div>
+          <h3 class="subj-title">Philosophie</h3>
+          <p class="subj-desc">Dissertations, explications de texte — maîtrise les auteurs, les attendus du correcteur et le jour J.</p>
+          <div class="subj-link" style="color:var(--ph)">S'inscrire au prochain bac blanc de philo <span>→</span></div>
+        </div>
+        <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:1.5px solid #6EE7B7;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
+          <span class="subj-badge" style="background:var(--green);color:white">Maths</span>
+          <div class="subj-icon">📐</div>
+          <h3 class="subj-title" style="color:#065F46">Mathématiques</h3>
+          <p class="subj-desc">Sujets type bac, exercices de spécialité — entraînement en conditions réelles et correction détaillée.</p>
+          <div class="subj-link" style="color:#065F46">S'inscrire au prochain bac blanc de maths <span>→</span></div>
+        </div>
+        <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:1.5px solid #93C5FD;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
+          <span class="subj-badge" style="background:#2563EB;color:white">Histoire-Géo</span>
+          <div class="subj-icon">🏛️</div>
+          <h3 class="subj-title" style="color:#1E3A8A">Histoire-Géo</h3>
+          <p class="subj-desc">Compositions, étude de documents — maîtrise les repères et la méthode officielle.</p>
+          <div class="subj-link" style="color:#1E3A8A">S'inscrire <span>→</span></div>
+        </div>
+        <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5);border:1.5px solid #FDBA74;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
+          <span class="subj-badge" style="background:#EA580C;color:white">HGGSP</span>
+          <div class="subj-icon">🌍</div>
+          <h3 class="subj-title" style="color:#9A3412">HGGSP</h3>
+          <p class="subj-desc">Jalons, problématiques géopolitiques — analyse de sources et construction d'arguments.</p>
+          <div class="subj-link" style="color:#9A3412">S'inscrire <span>→</span></div>
+        </div>
+        <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1.5px solid #C4B5FD;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
+          <span class="subj-badge" style="background:#7C3AED;color:white">SES</span>
+          <div class="subj-icon">📊</div>
+          <h3 class="subj-title" style="color:var(--ph)">SES</h3>
+          <p class="subj-desc">Raisonnement appuyé sur des données, dissertation économique — lecture de tableaux et mécanismes.</p>
+          <div class="subj-link" style="color:var(--ph)">S'inscrire <span>→</span></div>
+        </div>
+        <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#FDF4FF,#FAE8FF);border:1.5px solid #E879F9;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
+          <span class="subj-badge" style="background:#A21CAF;color:white">HLP</span>
+          <div class="subj-icon">📖</div>
+          <h3 class="subj-title" style="color:#701A75">HLP</h3>
+          <p class="subj-desc">Humanités, littérature et philosophie — essai, textes patrimoniaux et questionnement des idées.</p>
+          <div class="subj-link" style="color:#701A75">S'inscrire <span>→</span></div>
+        </div>
+        <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:1.5px solid #4ADE80;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
+          <span class="subj-badge" style="background:#16A34A;color:white">SVT</span>
+          <div class="subj-icon">🧬</div>
+          <h3 class="subj-title" style="color:#14532D">SVT</h3>
+          <p class="subj-desc">Sciences de la Vie et de la Terre — exploitation de documents, démarche scientifique et synthèse.</p>
+          <div class="subj-link" style="color:#14532D">S'inscrire <span>→</span></div>
+        </div>
+        <div class="subj-card" onclick="gotoPage('calendrier')" style="background:linear-gradient(135deg,#FFF1F2,#FFE4E6);border:1.5px solid #FCA5A5;border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all .3s ease;cursor:pointer">
+          <span class="subj-badge" style="background:#DC2626;color:white">Oral</span>
+          <div class="subj-icon">🎤</div>
+          <h3 class="subj-title" style="color:#7F1D1D">Oral</h3>
+          <p class="subj-desc">Préparation à l'oral du bac — présentation de l'objet d'étude, gestion du stress, réponses à l'examinateur.</p>
+          <div class="subj-link" style="color:#7F1D1D">S'inscrire <span>→</span></div>
         </div>
       </div>
     </div>
@@ -1083,21 +1148,18 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           <div class="section-accent sa-fr"></div>
           <div class="eyebrow" style="color:var(--fr);margin-bottom:12px">Pourquoi nous ?</div>
           <h2 class="section-title" style="margin-bottom:20px">Le complément qui fait <span class="script-accent" style="color:var(--fr)">vraiment</span> la différence.</h2>
-          <p class="body-lg" style="margin-bottom:32px">Ton lycée te prépare. Tes cours particuliers t'aident. Nous, on t'<strong>entraîne dans les vraies conditions</strong> et on t'explique exactement ce qui te fait perdre ou gagner des points.</p>
+          <p class="body-lg" style="margin-bottom:32px">Pendant toute la durée de l'épreuve — 3 à 4 heures — un coach suit ta copie en direct. Il vient te voir à des moments clés, t'oriente sur ce que tu es en train d'écrire, te donne des conseils pour construire la meilleure copie possible. Pas juste après : <strong>pendant que tu travailles.</strong></p>
           <button class="btn btn-fr" onclick="gotoPage('concept')">Voir comment ça marche →</button>
         </div>
         <div class="reveal" style="display:flex;flex-direction:column;gap:14px">
           <div class="card card-fr" style="display:flex;gap:16px;align-items:flex-start;padding:20px 24px">
-            <span style="font-size:1.8rem;flex-shrink:0">🎯</span>
-            <div><strong style="display:block;margin-bottom:4px">Conditions réelles d'examen</strong><span class="body-md">Sujet inédit, timing strict, correction selon la grille officielle du bac.</span></div>
+            <div><strong style="display:block;margin-bottom:4px">Coaching pendant l'épreuve</strong><span class="body-md">Le prof intervient en cours d'examen pour t'orienter, t'aider à développer tes idées et adopter les bons réflexes dans le feu de l'action.</span></div>
           </div>
           <div class="card card-ph" style="display:flex;gap:16px;align-items:flex-start;padding:20px 24px">
-            <span style="font-size:1.8rem;flex-shrink:0">🤝</span>
-            <div><strong style="display:block;margin-bottom:4px">Coaching 1-1 post-examen</strong><span class="body-md">Un prof expert parcourt ta copie avec toi et t'explique chaque point perdu.</span></div>
+            <div><strong style="display:block;margin-bottom:4px">Conditions réelles d'examen</strong><span class="body-md">Sujet inédit, timing strict, correction selon la grille officielle. Tu t'entraînes comme si c'était le vrai jour J.</span></div>
           </div>
           <div class="card card-gold" style="display:flex;gap:16px;align-items:flex-start;padding:20px 24px">
-            <span style="font-size:1.8rem;flex-shrink:0">📊</span>
-            <div><strong style="display:block;margin-bottom:4px">Dossier personnalisé ultra-détaillé</strong><span class="body-md">Tes axes de progrès, les notions à retravailler, et un plan concret pour le prochain bac blanc.</span></div>
+            <div><strong style="display:block;margin-bottom:4px">Dossier personnalisé sous 12h</strong><span class="body-md">Tes axes de progrès, les notions à retravailler, et un plan concret — reçu dans les 12h après ton épreuve.</span></div>
           </div>
         </div>
       </div>
@@ -1144,7 +1206,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
               <td>Tarif accessible</td>
               <td><span class="tick-n">✗ Cher</span></td>
               <td><span class="tick-y">✓ Gratuit</span></td>
-              <td class="col-us"><span class="tick-y">✓ Dès 29€</span></td>
+              <td class="col-us"><span class="tick-y">✓ Dès 69€</span></td>
             </tr>
           </tbody>
         </table>
@@ -1192,7 +1254,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
       <div class="cta-strip reveal">
         <div class="cta-strip-content">
           <h2 class="section-title" style="color:white;margin-bottom:12px">Prêt à passer au<br><span style="font-family:var(--script);color:var(--fr)">niveau supérieur ?</span></h2>
-          <p>Rejoins les 2 000+ élèves qui ont fait de leurs bacs blancs un vrai levier de progression.</p>
+          <p>Rejoins les 100 élèves qui ont fait de leurs bacs blancs un vrai levier de progression.</p>
           <div class="btns">
             <button class="btn btn-fr btn-lg" onclick="gotoPage('tarifs')">Voir les tarifs →</button>
             <button class="btn btn-outline btn-lg" onclick="gotoPage('concept')" style="background:transparent;color:white;border-color:rgba(255,255,255,.3)">Le concept</button>
@@ -1262,7 +1324,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
 
       <!-- Bandeau stats -->
       <div class="reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:64px;padding-top:40px;border-top:1px solid rgba(255,255,255,.12)">
-        <div><div style="font-family:var(--display);font-size:2.2rem;color:#FB923C">48h</div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">pour recevoir ta correction</div></div>
+        <div><div style="font-family:var(--display);font-size:2.2rem;color:#FB923C">12h</div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">pour recevoir ta correction</div></div>
         <div><div style="font-family:var(--display);font-size:2.2rem;color:#A78BFA">1-1</div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">coaching individuel en visio</div></div>
         <div><div style="font-family:var(--display);font-size:2.2rem;color:#2DD4A0">+3,2</div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">pts de progression moyenne</div></div>
         <div><div style="font-family:var(--display);font-size:2.2rem;color:#FBBF24">100%</div><div style="font-size:.82rem;color:rgba(255,255,255,.65)">rédigé par des profs experts</div></div>
@@ -1328,7 +1390,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           <div style="font-family:var(--display);font-size:3rem;color:var(--ph-l);line-height:1;margin-bottom:12px">02</div>
           <div style="font-size:1.6rem;margin-bottom:10px">📊</div>
           <h4 style="font-size:1.15rem;font-weight:700;margin-bottom:8px">Tu reçois ton dossier au top</h4>
-          <p style="font-size:.9rem;color:var(--grey);line-height:1.6">Sous 48h, un prof expert corrige ta copie et te livre un dossier <strong>ultra détaillé</strong> :</p>
+          <p style="font-size:.9rem;color:var(--grey);line-height:1.6">Sous 12h, un prof expert corrige ta copie et te livre un dossier <strong>ultra détaillé</strong> :</p>
           <ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:7px">
             <li style="font-size:.85rem;color:var(--dark2);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Correction détaillée de ta copie</li>
             <li style="font-size:.85rem;color:var(--dark2);display:flex;gap:8px"><span style="color:var(--green)">✓</span> Conseils d'amélioration (méthode &amp; rédaction)</li>
@@ -1656,13 +1718,18 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
     <div class="container" style="position:relative;z-index:2;text-align:center">
       <div class="eyebrow" style="color:var(--gold);margin-bottom:12px">Calendrier des bacs blancs</div>
       <h1 class="section-title reveal" style="margin-bottom:16px">Les prochaines<br><span class="script-accent" style="color:var(--ph)">Matinées du Bac</span></h1>
-      <p class="body-lg reveal" style="max-width:540px;margin:0 auto 28px">Réserve la place de ton enfant pour le prochain bac blanc. Chaque session inclut l'épreuve, la correction par un prof expert, le coaching et le dossier personnalisé.</p>
+      <p class="body-lg reveal" style="max-width:540px;margin:0 auto 28px">Réservez la place de votre enfant pour le prochain bac blanc. Chaque session inclut l'épreuve, le coaching personnalisé pendant l'examen, la correction par un prof expert et le dossier personnalisé.</p>
       <div class="reveal" style="display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center">
         <button class="filter-btn active" data-matiere="all" onclick="filterCalendar('all',this)">Toutes les matières</button>
-        <button class="filter-btn" data-matiere="francais" onclick="filterCalendar('francais',this)">✍️ Français</button>
-        <button class="filter-btn" data-matiere="philo" onclick="filterCalendar('philo',this)">∞ Philo</button>
-        <button class="filter-btn" data-matiere="histoire" onclick="filterCalendar('histoire',this)">🏛️ Histoire</button>
-        <button class="filter-btn" data-matiere="maths" onclick="filterCalendar('maths',this)">📐 Maths</button>
+        <button class="filter-btn" data-matiere="francais" onclick="filterCalendar('francais',this)">Français</button>
+        <button class="filter-btn" data-matiere="philo" onclick="filterCalendar('philo',this)">Philo</button>
+        <button class="filter-btn" data-matiere="histoire" onclick="filterCalendar('histoire',this)">Histoire-Géo</button>
+        <button class="filter-btn" data-matiere="maths" onclick="filterCalendar('maths',this)">Maths</button>
+        <button class="filter-btn" data-matiere="hggsp" onclick="filterCalendar('hggsp',this)">HGGSP</button>
+        <button class="filter-btn" data-matiere="ses" onclick="filterCalendar('ses',this)">SES</button>
+        <button class="filter-btn" data-matiere="hlp" onclick="filterCalendar('hlp',this)">HLP</button>
+        <button class="filter-btn" data-matiere="svt" onclick="filterCalendar('svt',this)">SVT</button>
+        <button class="filter-btn" data-matiere="oral" onclick="filterCalendar('oral',this)">Oral</button>
       </div>
     </div>
   </section>
@@ -1716,11 +1783,11 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           <div class="section-accent sa-both"></div>
           <div class="eyebrow" style="color:var(--fr);margin:16px 0 12px">Inscription</div>
           <h2 class="section-title" style="margin-bottom:18px">Réserve ta place en<br><span class="script-accent" style="color:var(--fr)">2 minutes.</span></h2>
-          <p class="body-lg" style="margin-bottom:24px">Inscris-toi à la session de ton choix. Tu recevras par email la convocation, le lien de connexion le jour J, puis ton dossier de correction personnalisé.</p>
+          <p class="body-lg" style="margin-bottom:24px">Inscrivez votre enfant à la session de votre choix. Vous recevrez par email la convocation, le lien de connexion le jour J, puis le dossier de correction personnalisé.</p>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:12px">
             <li style="display:flex;gap:10px;font-size:.92rem"><span style="color:var(--green);font-size:1.1rem">✓</span> Confirmation immédiate par email</li>
-            <li style="display:flex;gap:10px;font-size:.92rem"><span style="color:var(--green);font-size:1.1rem">✓</span> Dossier de correction reçu sous 48h</li>
-            <li style="display:flex;gap:10px;font-size:.92rem"><span style="color:var(--green);font-size:1.1rem">✓</span> Session de coaching en visio incluse</li>
+            <li style="display:flex;gap:10px;font-size:.92rem"><span style="color:var(--green);font-size:1.1rem">✓</span> Dossier de correction reçu sous 12h</li>
+            <li style="display:flex;gap:10px;font-size:.92rem"><span style="color:var(--green);font-size:1.1rem">✓</span> Coaching personnalisé 1-1 pendant l'épreuve inclus</li>
           </ul>
         </div>
         <div class="reveal">
@@ -1737,18 +1804,27 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
               </div>
             </div>
             <div style="margin-bottom:14px">
-              <label style="font-size:.78rem;font-weight:600;display:block;margin-bottom:6px">Email (pour recevoir la correction)</label>
+              <label style="font-size:.78rem;font-weight:600;display:block;margin-bottom:6px">Email du parent</label>
               <input required id="ins-email" type="email" placeholder="parent@email.com" class="form-input">
+            </div>
+            <div style="margin-bottom:14px">
+              <label style="font-size:.78rem;font-weight:600;display:block;margin-bottom:6px">Email de l'élève</label>
+              <input id="ins-email-eleve" type="email" placeholder="eleve@email.com" class="form-input">
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
               <div>
                 <label style="font-size:.78rem;font-weight:600;display:block;margin-bottom:6px">Matière</label>
                 <select required id="ins-matiere" class="form-input" onchange="updateSessionOptions()">
                   <option value="">Choisir…</option>
-                  <option value="francais">✍️ Français</option>
-                  <option value="philo">∞ Philosophie</option>
-                  <option value="histoire">🏛️ Histoire</option>
-                  <option value="maths">📐 Mathématiques</option>
+                  <option value="francais">Français</option>
+                  <option value="philo">Philosophie</option>
+                  <option value="histoire">Histoire-Géo</option>
+                  <option value="maths">Mathématiques</option>
+                  <option value="hggsp">HGGSP</option>
+                  <option value="ses">SES</option>
+                  <option value="hlp">HLP</option>
+                  <option value="svt">SVT</option>
+                  <option value="oral">Oral</option>
                 </select>
               </div>
               <div>
@@ -1787,96 +1863,131 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
         <p class="body-lg" style="max-width:480px;margin:0 auto">Passe un bac blanc quand tu en as besoin, ou accède à tout en illimité toute l'année.</p>
       </div>
 
-      <div class="pricing-toggle reveal">
-        <button class="pt-opt active" onclick="togglePrice('once',this)">À l'unité</button>
-        <button class="pt-opt" onclick="togglePrice('sub',this)">Abonnement mensuel</button>
-        <button class="pt-opt" onclick="togglePrice('year',this)">Annuel <span style="color:var(--fr);font-size:.7rem;margin-left:2px">−30%</span></button>
-      </div>
-
       <div class="pricing-cards reveal">
-        <!-- Par bac blanc -->
+        <!-- Épreuve à l'unité -->
         <div class="pc">
-          <div class="pc-icon">📄</div>
-          <div class="pc-name">Par bac blanc</div>
-          <p class="pc-desc">Idéal pour tester ou compléter les cours particuliers ponctuellement.</p>
+          <div class="pc-name">Épreuve avec coaching 1-1</div>
+          <p class="pc-desc">Une épreuve complète en conditions réelles, avec un coach présent tout au long de l'examen — puis la correction et le dossier personnalisé.</p>
           <div class="pc-price">
-            <div class="pc-amount"><span class="num" id="p1" style="color:var(--fr)">29</span><span class="eur" style="color:var(--fr)">€</span></div>
-            <div class="pc-period" id="pp1">par bac blanc</div>
-            <div class="pc-note" id="pn1">Sujet + correction + coaching 30 min + dossier</div>
+            <div class="pc-amount"><span class="num" style="color:var(--fr)">69</span><span class="eur" style="color:var(--fr)">€</span></div>
+            <div class="pc-period">par épreuve</div>
+            <div class="pc-note">Sujet + coaching pendant l'examen + correction + dossier sous 12h</div>
           </div>
           <ul class="pc-features">
             <li><span class="tick">✓</span> Sujet inédit calibré bac</li>
-            <li><span class="tick">✓</span> Correction détaillée par un prof</li>
-            <li><span class="tick">✓</span> Session coaching 1-1 (30 min)</li>
-            <li><span class="tick">✓</span> Dossier de progression personnalisé</li>
-            <li class="off"><span class="tick">—</span> Accès ressources illimité</li>
-            <li class="off"><span class="tick">—</span> Bacs blancs illimités inclus</li>
+            <li><span class="tick">✓</span> Coach présent pendant toute l'épreuve (3–4h)</li>
+            <li><span class="tick">✓</span> Coaching personnalisé 1-1 coach / élève</li>
+            <li><span class="tick">✓</span> Correction détaillée par un prof expert</li>
+            <li><span class="tick">✓</span> Dossier de progression reçu sous 12h</li>
+            <li class="off"><span class="tick">—</span> Épreuves supplémentaires incluses</li>
           </ul>
-          <button class="btn btn-outline cta-btn" onclick="gotoPage('concept')">Réserver un bac blanc</button>
+          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription" target="_blank" class="btn btn-outline cta-btn">Réserver une épreuve</a>
         </div>
 
-        <!-- Abonnement -->
+        <!-- Pack réussite -->
         <div class="pc featured">
-          <div class="pop-badge">⭐ Le plus populaire</div>
-          <div class="pc-icon">🚀</div>
-          <div class="pc-name">Abonnement mensuel</div>
-          <p class="pc-desc">1 bac blanc par mois + accès toutes les ressources. Pour progresser régulièrement.</p>
+          <div class="pop-badge">Le plus populaire</div>
+          <div class="pc-name">Pack réussite</div>
+          <p class="pc-desc">3 bacs blancs écrits + 1 oral pour un entraînement complet jusqu'au jour J. Le combo gagnant.</p>
           <div class="pc-price">
-            <div class="pc-amount"><span class="num" id="p2" style="color:var(--ph)">49</span><span class="eur" style="color:var(--ph)">€</span></div>
-            <div class="pc-period" id="pp2">par mois · sans engagement</div>
-            <div class="pc-note" id="pn2">Économise 20€ vs. à l'unité</div>
+            <div class="pc-amount"><span class="num" style="color:var(--ph)">259</span><span class="eur" style="color:var(--ph)">€</span></div>
+            <div class="pc-period">le pack · au lieu de 280€</div>
+            <div class="pc-note">Économie de 21€ sur le prix réel</div>
           </div>
           <ul class="pc-features">
-            <li><span class="tick">✓</span> 1 bac blanc / mois inclus</li>
-            <li><span class="tick">✓</span> Correction + coaching 45 min</li>
-            <li><span class="tick">✓</span> Dossier de progression complet</li>
-            <li><span class="tick">✓</span> Accès ressources illimité</li>
-            <li><span class="tick">✓</span> Bacs blancs supplémentaires à tarif réduit</li>
-            <li class="off"><span class="tick">—</span> Bacs blancs illimités inclus</li>
+            <li><span class="tick">✓</span> 3 épreuves écrites au choix</li>
+            <li><span class="tick">✓</span> 1 préparation à l'oral incluse</li>
+            <li><span class="tick">✓</span> Coach 1-1 pendant chaque épreuve</li>
+            <li><span class="tick">✓</span> 4 corrections + 4 dossiers personnalisés</li>
+            <li><span class="tick">✓</span> Suivi de progression entre chaque épreuve</li>
+            <li><span class="tick">✓</span> Dossiers reçus sous 12h</li>
           </ul>
-          <button class="btn btn-ph cta-btn" onclick="gotoPage('concept')">S'abonner maintenant</button>
+          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription" target="_blank" class="btn btn-ph cta-btn">Choisir le Pack réussite</a>
         </div>
 
-        <!-- Annuel -->
+        <!-- Annuel illimité -->
         <div class="pc">
-          <div class="pc-icon">🏆</div>
-          <div class="pc-name">Accès illimité annuel</div>
-          <p class="pc-desc">Bacs blancs illimités, toutes les ressources, coaching prioritaire. Le pack complet.</p>
+          <div class="pc-name">Accompagnement annuel</div>
+          <p class="pc-desc">Bacs blancs illimités toute l'année scolaire — au prix d'un seul cours particulier par mois.</p>
           <div class="pc-price">
-            <div class="pc-amount"><span class="num" id="p3" style="color:var(--gold)">299</span><span class="eur" style="color:var(--gold)">€</span></div>
-            <div class="pc-period" id="pp3">par an · soit 25€/mois</div>
-            <div class="pc-note" id="pn3">Accès illimité · Toute l'année scolaire</div>
+            <div class="pc-amount"><span class="num" style="color:var(--gold)">499</span><span class="eur" style="color:var(--gold)">€</span></div>
+            <div class="pc-period">par an · soit 41€/mois</div>
+            <div class="pc-note">Le prix d'un cours particulier — pour un accompagnement illimité</div>
           </div>
           <ul class="pc-features">
-            <li><span class="tick">✓</span> Bacs blancs illimités (FR + Philo)</li>
-            <li><span class="tick">✓</span> Corrections + coachings illimités</li>
-            <li><span class="tick">✓</span> Dossier mis à jour après chaque BB</li>
-            <li><span class="tick">✓</span> Toutes les ressources débloquées</li>
-            <li><span class="tick">✓</span> Accès prioritaire nouveaux sujets</li>
+            <li><span class="tick">✓</span> Épreuves illimitées toute l'année</li>
+            <li><span class="tick">✓</span> Toutes les matières couvertes</li>
+            <li><span class="tick">✓</span> Coach 1-1 à chaque épreuve</li>
+            <li><span class="tick">✓</span> Corrections + dossiers illimités sous 12h</li>
+            <li><span class="tick">✓</span> Suivi de progression complet</li>
             <li><span class="tick">✓</span> Coaching d'urgence avant le vrai bac</li>
           </ul>
-          <button class="btn btn-dark cta-btn" onclick="gotoPage('concept')">Accès illimité →</button>
+          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription" target="_blank" class="btn btn-dark cta-btn">Accompagnement annuel →</a>
         </div>
       </div>
 
-      <div style="margin-top:64px" class="reveal">
+      <!-- Comparatif plateformes -->
+      <div style="margin-top:56px;background:white;border:1px solid var(--border);border-radius:20px;padding:36px" class="reveal">
+        <h3 style="text-align:center;font-size:1.2rem;font-weight:700;margin-bottom:8px">Pourquoi pas un stage en ligne ?</h3>
+        <p class="body-md" style="text-align:center;margin-bottom:28px">Les plateformes de soutien scolaire proposent des stages collectifs autour de 250€ — sans coach dédié, sans dossier personnalisé, sans coaching pendant l'épreuve.</p>
+        <div class="vs-wrap">
+          <table class="vs-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Stage collectif (~250€)</th>
+                <th class="h-us">Les Matinées du Bac</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Coach présent pendant l'épreuve</td>
+                <td><span class="tick-n">Non</span></td>
+                <td class="col-us"><span class="tick-y">Oui — en direct</span></td>
+              </tr>
+              <tr>
+                <td>Coaching personnalisé 1-1</td>
+                <td><span class="tick-n">Non — collectif</span></td>
+                <td class="col-us"><span class="tick-y">Oui</span></td>
+              </tr>
+              <tr>
+                <td>Dossier de correction individuel</td>
+                <td><span class="tick-n">Non</span></td>
+                <td class="col-us"><span class="tick-y">Oui — sous 12h</span></td>
+              </tr>
+              <tr>
+                <td>Suivi de progression</td>
+                <td><span class="tick-n">Non</span></td>
+                <td class="col-us"><span class="tick-y">Oui</span></td>
+              </tr>
+              <tr>
+                <td>Tarif</td>
+                <td><span style="color:var(--dark2)">~250€ le stage</span></td>
+                <td class="col-us"><span class="tick-y">Dès 69€ l'épreuve</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="margin-top:48px" class="reveal">
         <h3 style="text-align:center;font-size:1.3rem;font-weight:700;margin-bottom:28px">Questions fréquentes</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
           <div class="card">
             <h4 style="margin-bottom:8px;font-size:.95rem">Quelle différence avec un cours particulier ?</h4>
-            <p class="body-md">Un cours particulier t'aide à comprendre le cours. Nous, on t'entraîne dans les vraies conditions et on coach ce qui fait perdre des points au correcteur.</p>
+            <p class="body-md">Un cours particulier aide à comprendre le cours. Ici, l'élève s'entraîne dans les vraies conditions et est coaché pendant l'épreuve — exactement ce que l'examinateur évalue.</p>
           </div>
           <div class="card">
-            <h4 style="margin-bottom:8px;font-size:.95rem">Puis-je faire Français ET Philo ?</h4>
-            <p class="body-md">Oui. L'abonnement et l'accès annuel couvrent les deux matières. Tu alternes selon ton planning.</p>
+            <h4 style="margin-bottom:8px;font-size:.95rem">Peut-on faire plusieurs matières ?</h4>
+            <p class="body-md">Oui. L'accompagnement annuel couvre toutes les matières. Le pack réussite est à choisir par matière ou à combiner.</p>
           </div>
           <div class="card">
-            <h4 style="margin-bottom:8px;font-size:.95rem">Délai pour recevoir la correction ?</h4>
-            <p class="body-md">48h maximum après rendu de ta copie. La session coaching se planifie dans la semaine qui suit.</p>
+            <h4 style="margin-bottom:8px;font-size:.95rem">Délai pour recevoir le dossier ?</h4>
+            <p class="body-md">12h maximum après rendu de la copie — votre enfant reçoit son dossier de correction complet directement par email.</p>
           </div>
           <div class="card">
-            <h4 style="margin-bottom:8px;font-size:.95rem">Le bac blanc compte pour ma note au lycée ?</h4>
-            <p class="body-md">Non, c'est entièrement indépendant du lycée. C'est un espace d'entraînement sans pression scolaire.</p>
+            <h4 style="margin-bottom:8px;font-size:.95rem">Le bac blanc compte pour la note du lycée ?</h4>
+            <p class="body-md">Non, c'est entièrement indépendant du lycée. Un espace d'entraînement sans pression scolaire.</p>
           </div>
         </div>
       </div>
@@ -1984,17 +2095,14 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="why-prof-grid">
           <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:28px">
-            <div style="font-size:1.8rem;margin-bottom:12px">🧩</div>
             <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:8px">Le complément parfait à tes cours</h3>
             <p style="font-size:.875rem;color:var(--grey);line-height:1.6">Tu donnes déjà des cours ? Les bacs blancs en sont le prolongement naturel : tes élèves s'entraînent en conditions réelles et tu leur offres un <strong>accompagnement complet</strong>, de la théorie jusqu'à la performance le jour J.</p>
           </div>
           <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:28px">
-            <div style="font-size:1.8rem;margin-bottom:12px">⚖️</div>
             <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:8px">Une rémunération juste</h3>
             <p style="font-size:.875rem;color:var(--grey);line-height:1.6">Tu es payé à ta vraie valeur pour chaque correction et chaque coaching. Pas de tarif au rabais : ton expertise d'agrégé, certifié ou correcteur est <strong>reconnue et justement rémunérée</strong>.</p>
           </div>
           <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:28px">
-            <div style="font-size:1.8rem;margin-bottom:12px">💸</div>
             <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:8px">Un revenu en plus grâce à l'affiliation</h3>
             <p style="font-size:.875rem;color:var(--grey);line-height:1.6">Recommande la plateforme à ton réseau d'élèves avec ton lien personnalisé et touche une <strong>commission sur chaque inscription</strong> — un complément de revenu qui s'ajoute à tes corrections, sans effort supplémentaire.</p>
           </div>
@@ -2009,9 +2117,8 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
       </div>
       <div class="earn-grid reveal">
         <div class="earn-card ec-affil">
-          <div class="ec-icon">🔗</div>
-          <h3 class="ec-title">Programme d'Affiliation</h3>
-          <p class="ec-desc">Tu as un réseau d'élèves, une communauté, des contacts ? Recommande la plateforme avec ton lien personnalisé et gagne une commission sur chaque inscription. Pas besoin de corriger — juste partager.</p>
+          <h3 class="ec-title">Programme d'affiliation</h3>
+          <p class="ec-desc">Tu as un réseau d'élèves, une communauté, des contacts ? Recommande la plateforme avec ton lien personnalisé et touche une commission sur chaque premier bac blanc inscrit grâce à toi. Pas besoin de corriger — juste partager.</p>
           <ul style="list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:7px">
             <li style="font-size:.85rem;display:flex;align-items:center;gap:8px"><span style="color:var(--green)">✓</span> Lien de parrainage personnalisé</li>
             <li style="font-size:.85rem;display:flex;align-items:center;gap:8px"><span style="color:var(--green)">✓</span> Commission versée tous les mois</li>
@@ -2019,23 +2126,20 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
             <li style="font-size:.85rem;display:flex;align-items:center;gap:8px"><span style="color:var(--green)">✓</span> Aucun engagement minimum</li>
           </ul>
           <div class="ec-earn">
-            <div><div class="amount">15%</div><div class="per">de commission / inscription</div></div>
-            <div style="text-align:right"><div style="font-size:.75rem;color:var(--grey)">Jusqu'à</div><div style="font-family:var(--display);font-size:1.3rem;color:var(--gold)">45€/élève</div></div>
+            <div><div class="amount">10€</div><div class="per">par élève inscrit à son 1er bac blanc grâce à toi</div></div>
           </div>
         </div>
         <div class="earn-card ec-coach">
-          <div class="ec-icon">🎯</div>
-          <h3 class="ec-title">Correcteur & Coach</h3>
-          <p class="ec-desc">Tu corriges les copies et coiffes les sessions de coaching. Accès à notre plateforme de création de dossiers — on s'occupe du marketing, tu te concentres sur la pédagogie.</p>
+          <h3 class="ec-title">Correcteur et coach</h3>
+          <p class="ec-desc">Tu coiffes les épreuves en visio, tu corriges les copies et tu génères le dossier élève via notre plateforme. On s'occupe du marketing et de l'organisation — tu te concentres sur la pédagogie.</p>
           <ul style="list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:7px">
-            <li style="font-size:.85rem;display:flex;align-items:center;gap:8px"><span style="color:var(--green)">✓</span> Rémunéré à la correction + au coaching</li>
+            <li style="font-size:.85rem;display:flex;align-items:center;gap:8px"><span style="color:var(--green)">✓</span> Rémunéré à la matinée de correction</li>
             <li style="font-size:.85rem;display:flex;align-items:center;gap:8px"><span style="color:var(--green)">✓</span> Accès plateforme dossiers élèves</li>
             <li style="font-size:.85rem;display:flex;align-items:center;gap:8px"><span style="color:var(--green)">✓</span> Planning flexible, 100% remote</li>
             <li style="font-size:.85rem;display:flex;align-items:center;gap:8px"><span style="color:var(--green)">✓</span> Formation à notre méthode dossier</li>
           </ul>
           <div class="ec-earn">
-            <div><div class="amount">25–40€</div><div class="per">par correction complète</div></div>
-            <div style="text-align:right"><div style="font-size:.75rem;color:var(--grey)">+ coaching</div><div style="font-family:var(--display);font-size:1.3rem;color:var(--ph)">20€/session</div></div>
+            <div><div class="amount">150–200€</div><div class="per">la matinée de correction de 4h TTC</div></div>
           </div>
         </div>
       </div>
@@ -2045,12 +2149,12 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           <h2 class="section-title">C'est simple, bénéfique,<br><span class="script-accent" style="color:var(--ph)">et ça rapporte vraiment.</span></h2>
         </div>
         <div class="advantages-grid">
-          <div class="adv"><div class="adv-icon">⏰</div><div class="adv-title">Flexibilité totale</div><p class="adv-desc">Tu travailles quand tu veux. Corrections à ton rythme, coachings selon tes dispos. 100% remote, 0% contrainte imposée.</p></div>
-          <div class="adv"><div class="adv-icon">💰</div><div class="adv-title">Revenus complémentaires réels</div><p class="adv-desc">3 corrections/semaine = 360€/mois min. Avec affiliation + coaching, un prof actif génère 500-800€/mois en parallèle.</p></div>
-          <div class="adv"><div class="adv-icon">🛠️</div><div class="adv-title">Outils clés en main</div><p class="adv-desc">Accès à notre plateforme de génération de dossiers élèves. Tu remplis les champs, le dossier se génère automatiquement.</p></div>
-          <div class="adv"><div class="adv-icon">📈</div><div class="adv-title">Croissance avec la plateforme</div><p class="adv-desc">Plus d'élèves sur la plateforme = plus de travail pour toi. On fait le marketing, tu en bénéficies.</p></div>
-          <div class="adv"><div class="adv-icon">🎓</div><div class="adv-title">Impact pédagogique fort</div><p class="adv-desc">Tu vois des élèves passer de 11 à 17. Le dossier te permet de mesurer concrètement ton impact.</p></div>
-          <div class="adv"><div class="adv-icon">🤝</div><div class="adv-title">Communauté de profs</div><p class="adv-desc">Tu rejoins un réseau partageant les mêmes méthodes. Échange de pratiques, sujets partagés, support équipe.</p></div>
+          <div class="adv"><div class="adv-title">Flexibilité totale</div><p class="adv-desc">Tu travailles quand tu veux. Corrections à ton rythme, coachings selon tes dispos. 100% remote, 0% contrainte imposée.</p></div>
+          <div class="adv"><div class="adv-title">Revenus complémentaires réels</div><p class="adv-desc">1 matinée de correction = 150 à 200€ TTC. Avec l'affiliation, un prof actif génère un revenu régulier en complément.</p></div>
+          <div class="adv"><div class="adv-title">Outils clés en main</div><p class="adv-desc">Accès à notre plateforme de génération de dossiers élèves. Tu remplis les champs, le dossier se génère automatiquement.</p></div>
+          <div class="adv"><div class="adv-title">Croissance avec la plateforme</div><p class="adv-desc">Plus d'élèves sur la plateforme = plus de travail pour toi. On fait le marketing, tu en bénéficies.</p></div>
+          <div class="adv"><div class="adv-title">Impact pédagogique fort</div><p class="adv-desc">Tu vois des élèves passer de 11 à 17. Le dossier te permet de mesurer concrètement ton impact.</p></div>
+          <div class="adv"><div class="adv-title">Communauté de profs</div><p class="adv-desc">Tu rejoins un réseau partageant les mêmes méthodes. Échange de pratiques, sujets partagés, support équipe.</p></div>
         </div>
       </div>
 
@@ -2079,7 +2183,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
       <div style="text-align:center;margin-bottom:40px" class="reveal">
         <div class="section-accent sa-fr" style="margin:0 auto 16px"></div>
         <div class="eyebrow" style="color:var(--fr);margin-bottom:12px">Avis & Témoignages</div>
-        <h1 class="section-title" style="margin-bottom:16px">2 000+ élèves ont progressé.<br><span class="script-accent" style="color:var(--green)">Voilà ce qu'ils disent.</span></h1>
+        <h1 class="section-title" style="margin-bottom:16px">100+ élèves ont progressé.<br><span class="script-accent" style="color:var(--green)">Voilà ce qu'ils disent.</span></h1>
       </div>
       <div class="rating-box reveal">
         <div class="rb-big" style="text-align:center;flex-shrink:0">
@@ -2140,7 +2244,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
         </div>
       </div>
       <div style="text-align:center;margin-top:48px" class="reveal">
-        <button class="btn btn-fr btn-lg" onclick="gotoPage('tarifs')">Rejoindre + de 2 000 élèves →</button>
+        <button class="btn btn-fr btn-lg" onclick="gotoPage('tarifs')">Rejoindre + de 100 élèves →</button>
       </div>
     </div>
   </section>
@@ -2171,9 +2275,11 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
       <div class="footer-col">
         <h5>Matières</h5>
         <ul>
-          <li><a>Slay le Français</a></li>
-          <li><a>Slay la Philo</a></li>
-          <li><a>Méthode & Ressources</a></li>
+          <li><a onclick="gotoPage('calendrier')">Français</a></li>
+          <li><a onclick="gotoPage('calendrier')">Philosophie</a></li>
+          <li><a onclick="gotoPage('calendrier')">Mathématiques</a></li>
+          <li><a onclick="gotoPage('calendrier')">Histoire-Géo · HGGSP · SES</a></li>
+          <li><a onclick="gotoPage('calendrier')">HLP · SVT · Oral</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2377,7 +2483,7 @@ function renderEleveDash(e) {
             <div class="el-li">💻 Ordinateur ou tablette + bonne connexion. Caméra et micro activés.</div>
             <div class="el-li">🖊️ Compose au propre, comme au bac. Prends une <strong>photo nette</strong> de ta copie à la fin.</div>
             <div class="el-li">⏱️ Respecte le temps imparti — c'est ce qui rend l'entraînement utile.</div>
-            <div class="el-li">📤 Dépose ta copie via le lien envoyé. Ton dossier arrive sous 48h.</div>
+            <div class="el-li">📤 Dépose ta copie via le lien envoyé. Ton dossier arrive sous 12h.</div>
           </div>
           <!-- Comment ça se passe -->
           <div class="el-card">
@@ -2385,7 +2491,7 @@ function renderEleveDash(e) {
             <div class="el-step"><div class="n">1</div><div><strong>Tu rejoins ta salle en visio</strong><br><span style="font-size:.84rem;color:var(--grey)">Un clic sur le lien, tu entres dans ton salon perso.</span></div></div>
             <div class="el-step"><div class="n">2</div><div><strong>Tu composes, un coach te suit en direct</strong><br><span style="font-size:.84rem;color:var(--grey)">Il te guide en temps réel et t'aide à garder les bons réflexes.</span></div></div>
             <div class="el-step"><div class="n">3</div><div><strong>Tu rends ta copie</strong><br><span style="font-size:.84rem;color:var(--grey)">Photo ou fichier, en fin d'épreuve.</span></div></div>
-            <div class="el-step"><div class="n">4</div><div><strong>Tu reçois ton dossier sous 48h</strong><br><span style="font-size:.84rem;color:var(--grey)">Correction détaillée + plan de travail + fiches.</span></div></div>
+            <div class="el-step"><div class="n">4</div><div><strong>Tu reçois ton dossier sous 12h</strong><br><span style="font-size:.84rem;color:var(--grey)">Correction détaillée + plan de travail + fiches.</span></div></div>
           </div>
           <!-- Suivi de progression -->
           <div class="el-card">
@@ -2565,7 +2671,12 @@ const MATIERE_INFO = {
   francais: { label: 'Français',      icon: '✍️', grad: 'linear-gradient(135deg,#FB923C,#EA580C)', color: '#EA580C' },
   philo:    { label: 'Philosophie',   icon: '∞',  grad: 'linear-gradient(135deg,#7C3AED,#581C87)', color: '#581C87' },
   histoire: { label: 'Histoire-Géo',  icon: '🏛️', grad: 'linear-gradient(135deg,#0EA5E9,#0369A1)', color: '#0369A1' },
-  maths:    { label: 'Mathématiques', icon: '📐', grad: 'linear-gradient(135deg,#10B981,#047857)', color: '#047857' }
+  maths:    { label: 'Mathématiques', icon: '📐', grad: 'linear-gradient(135deg,#10B981,#047857)', color: '#047857' },
+  hggsp:    { label: 'HGGSP',         icon: '🌍', grad: 'linear-gradient(135deg,#F97316,#EA580C)', color: '#C2410C' },
+  ses:      { label: 'SES',           icon: '📊', grad: 'linear-gradient(135deg,#8B5CF6,#6D28D9)', color: '#6D28D9' },
+  hlp:      { label: 'HLP',           icon: '📖', grad: 'linear-gradient(135deg,#D946EF,#A21CAF)', color: '#A21CAF' },
+  svt:      { label: 'SVT',           icon: '🧬', grad: 'linear-gradient(135deg,#22C55E,#15803D)', color: '#15803D' },
+  oral:     { label: 'Oral',          icon: '🎤', grad: 'linear-gradient(135deg,#EF4444,#B91C1C)', color: '#B91C1C' }
 };
 
 // ── Connexion au CRM Supabase + écran de correction ──
@@ -2588,10 +2699,16 @@ const SESSIONS = [
   { matiere:'philo',    date:'21', mois:'Juin', jour:'Samedi', heure:'9h00 — 13h00', type:'Dissertation', niveau:'Terminale', places:14, total:20 },
   { matiere:'maths',    date:'28', mois:'Juin', jour:'Samedi', heure:'9h00 — 12h00', type:'Sujet type bac', niveau:'Terminale', places:5, total:20 },
   { matiere:'histoire', date:'05', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Composition & étude doc', niveau:'Terminale', places:17, total:20 },
+  { matiere:'hggsp',   date:'05', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Composition & analyse de doc', niveau:'Terminale', places:18, total:20 },
+  { matiere:'ses',      date:'12', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Dissertation & épreuve composée', niveau:'Terminale', places:16, total:20 },
   { matiere:'francais', date:'12', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Analyse linéaire & oral', niveau:'Première', places:11, total:20 },
+  { matiere:'hlp',      date:'19', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Essai & étude de textes', niveau:'Terminale', places:18, total:20 },
   { matiere:'philo',    date:'19', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Explication de texte', niveau:'Terminale', places:9, total:20 },
+  { matiere:'svt',      date:'26', mois:'Juil', jour:'Samedi', heure:'9h00 — 12h00', type:'Exploitation de documents & synthèse', niveau:'Terminale', places:18, total:20 },
+  { matiere:'oral',     date:'26', mois:'Juil', jour:'Samedi', heure:'14h00 — 16h00', type:'Présentation objet d\'étude + entretien', niveau:'Première / Terminale', places:12, total:15 },
   { matiere:'maths',    date:'30', mois:'Août', jour:'Samedi', heure:'9h00 — 12h00', type:'Révisions intensives', niveau:'Terminale', places:20, total:20 },
-  { matiere:'histoire', date:'06', mois:'Sept', jour:'Samedi', heure:'9h00 — 13h00', type:'Composition', niveau:'Terminale', places:20, total:20 }
+  { matiere:'histoire', date:'06', mois:'Sept', jour:'Samedi', heure:'9h00 — 13h00', type:'Composition', niveau:'Terminale', places:20, total:20 },
+  { matiere:'ses',      date:'06', mois:'Sept', jour:'Samedi', heure:'9h00 — 13h00', type:'Révisions rentrée', niveau:'Terminale', places:20, total:20 }
 ];
 
 function renderCalendar(filter) {
@@ -2760,7 +2877,7 @@ async function submitInscription(e) {
   const box = document.getElementById('inscription-success');
   box.style.display = 'block';
   document.getElementById('inscription-success-msg').innerHTML =
-    `Merci <strong>${prenom}</strong> ! Ton inscription au bac blanc de <strong>${m ? m.label : matiere}</strong> (${session}) est enregistrée.<br><br>Un email de confirmation va être envoyé à <strong>${email}</strong> avec la convocation. Ton dossier de correction personnalisé arrivera à cette adresse sous 48h après l'épreuve. 📧`;
+    `Merci <strong>${prenom}</strong> ! Ton inscription au bac blanc de <strong>${m ? m.label : matiere}</strong> (${session}) est enregistrée.<br><br>Un email de confirmation va être envoyé à <strong>${email}</strong> avec la convocation. Ton dossier de correction personnalisé arrivera à cette adresse sous 12h après l'épreuve. 📧`;
 }
 
 function resetInscription() {

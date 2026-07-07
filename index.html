@@ -2746,20 +2746,20 @@ async function supaGet(path) {
   } catch (e) { return null; }
 }
 const SESSIONS = [
-  { matiere:'francais', date:'14', mois:'Juin', jour:'Samedi', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:8, total:20 },
-  { matiere:'philo',    date:'21', mois:'Juin', jour:'Samedi', heure:'9h00 — 13h00', type:'Dissertation', niveau:'Terminale', places:14, total:20 },
-  { matiere:'maths',    date:'28', mois:'Juin', jour:'Samedi', heure:'9h00 — 12h00', type:'Sujet type bac', niveau:'Terminale', places:5, total:20 },
-  { matiere:'histoire', date:'05', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Composition & étude doc', niveau:'Terminale', places:17, total:20 },
-  { matiere:'hggsp',   date:'05', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Composition & analyse de doc', niveau:'Terminale', places:18, total:20 },
-  { matiere:'ses',      date:'12', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Dissertation & épreuve composée', niveau:'Terminale', places:16, total:20 },
-  { matiere:'francais', date:'12', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Analyse linéaire & oral', niveau:'Première', places:11, total:20 },
-  { matiere:'hlp',      date:'19', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Essai & étude de textes', niveau:'Terminale', places:18, total:20 },
-  { matiere:'philo',    date:'19', mois:'Juil', jour:'Samedi', heure:'9h00 — 13h00', type:'Explication de texte', niveau:'Terminale', places:9, total:20 },
-  { matiere:'svt',      date:'26', mois:'Juil', jour:'Samedi', heure:'9h00 — 12h00', type:'Exploitation de documents & synthèse', niveau:'Terminale', places:18, total:20 },
-  { matiere:'oral',     date:'26', mois:'Juil', jour:'Samedi', heure:'14h00 — 16h00', type:'Présentation objet d\'étude + entretien', niveau:'Première / Terminale', places:12, total:15 },
-  { matiere:'maths',    date:'30', mois:'Août', jour:'Samedi', heure:'9h00 — 12h00', type:'Révisions intensives', niveau:'Terminale', places:20, total:20 },
-  { matiere:'histoire', date:'06', mois:'Sept', jour:'Samedi', heure:'9h00 — 13h00', type:'Composition', niveau:'Terminale', places:20, total:20 },
-  { matiere:'ses',      date:'06', mois:'Sept', jour:'Samedi', heure:'9h00 — 13h00', type:'Révisions rentrée', niveau:'Terminale', places:20, total:20 }
+  { matiere:'francais', date:'31', mois:'Oct',  jour:'Samedi', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:8, total:20 },
+  { matiere:'philo',    date:'07', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Dissertation', niveau:'Terminale', places:14, total:20 },
+  { matiere:'maths',    date:'14', mois:'Nov',  jour:'Samedi', heure:'9h00 — 12h00', type:'Sujet type bac', niveau:'Terminale', places:5, total:20 },
+  { matiere:'histoire', date:'21', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Composition & étude doc', niveau:'Terminale', places:17, total:20 },
+  { matiere:'hggsp',   date:'21', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Composition & analyse de doc', niveau:'Terminale', places:18, total:20 },
+  { matiere:'ses',      date:'28', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Dissertation & épreuve composée', niveau:'Terminale', places:16, total:20 },
+  { matiere:'francais', date:'28', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Analyse linéaire & oral', niveau:'Première', places:11, total:20 },
+  { matiere:'hlp',      date:'05', mois:'Déc',  jour:'Samedi', heure:'9h00 — 13h00', type:'Essai & étude de textes', niveau:'Terminale', places:18, total:20 },
+  { matiere:'philo',    date:'05', mois:'Déc',  jour:'Samedi', heure:'9h00 — 13h00', type:'Explication de texte', niveau:'Terminale', places:9, total:20 },
+  { matiere:'svt',      date:'12', mois:'Déc',  jour:'Samedi', heure:'9h00 — 12h00', type:'Exploitation de documents & synthèse', niveau:'Terminale', places:18, total:20 },
+  { matiere:'oral',     date:'12', mois:'Déc',  jour:'Samedi', heure:'14h00 — 16h00', type:'Présentation objet d\'étude + entretien', niveau:'Première / Terminale', places:12, total:15 },
+  { matiere:'maths',    date:'19', mois:'Déc',  jour:'Samedi', heure:'9h00 — 12h00', type:'Révisions intensives', niveau:'Terminale', places:20, total:20 },
+  { matiere:'histoire', date:'09', mois:'Janv', jour:'Samedi', heure:'9h00 — 13h00', type:'Composition', niveau:'Terminale', places:20, total:20 },
+  { matiere:'ses',      date:'09', mois:'Janv', jour:'Samedi', heure:'9h00 — 13h00', type:'Révisions rentrée', niveau:'Terminale', places:20, total:20 }
 ];
 
 function renderCalendar(filter) {

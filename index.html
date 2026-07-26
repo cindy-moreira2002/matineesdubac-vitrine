@@ -2720,6 +2720,7 @@ function gotoPage(id) {
 // CALENDRIER DES BACS BLANCS
 // ══════════════════════════════════════════
 const MATIERE_INFO = {
+  all:      { label: 'Toutes matières', icon: '🧭', grad: 'linear-gradient(135deg,#1E1145,#3A1A2E)', color: '#1E1145' },
   francais: { label: 'Français',      icon: '✍️', grad: 'linear-gradient(135deg,#FB923C,#EA580C)', color: '#EA580C' },
   philo:    { label: 'Philosophie',   icon: '∞',  grad: 'linear-gradient(135deg,#7C3AED,#581C87)', color: '#581C87' },
   histoire: { label: 'Histoire-Géo',  icon: '🏛️', grad: 'linear-gradient(135deg,#0EA5E9,#0369A1)', color: '#0369A1' },
@@ -3029,7 +3030,8 @@ const PROF_ACCOUNTS = {
   'clara':   { password: 'francais2026', nom: 'Clara L.',   matiere: 'francais', titre: 'Coach Français · Ex-correctrice' },
   'thomas':  { password: 'philo2025',    nom: 'Thomas M.',  matiere: 'philo',    titre: 'Coach Philo · Certifié' },
   'nadia':   { password: 'philo2026',    nom: 'Nadia K.',   matiere: 'philo',    titre: 'Coach Philo · Docteure' },
-  'admin':   { password: 'matineesbac2025', nom: 'Admin',   matiere: 'philo',    titre: 'Administrateur' }
+  'ses':     { password: 'ses2027',      nom: 'Coach SES',  matiere: 'ses',      titre: 'Coach SES · Test' },
+  'admin':   { password: 'matineesbac2025', nom: 'Admin',   matiere: 'all',      titre: 'Administrateur' }
 };
 let selectedMatiere = 'philo';
 let isLoggedIn = false;
@@ -3085,28 +3087,34 @@ function initProfDashboard() {
   document.getElementById('prof-planning-matiere').textContent = m.label;
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const sessionDate = (s) => new Date(CAL_YEAR, MOIS_NUM[s.mois], parseInt(s.date, 10));
-  const mine = SESSIONS.filter(s => s.matiere === currentProf.matiere);
+  const isAllMatieres = currentProf.matiere === 'all';
+  const mine = isAllMatieres ? SESSIONS : SESSIONS.filter(s => s.matiere === currentProf.matiere);
   const futurs = mine.filter(s => sessionDate(s) >= today);
   const passes = mine.filter(s => sessionDate(s) < today).sort((a, b) => sessionDate(b) - sessionDate(a));
 
-  // Prochains bacs blancs
+  // Prochains bacs blancs (cliquables → participants + salons visio)
   document.getElementById('prof-planning-list').innerHTML = futurs.length ? futurs.map(s => {
+    const sInfo = MATIERE_INFO[s.matiere] || m;
     const full = s.places === 0;
     const col = full ? '#DC2626' : s.places <= 6 ? '#D97706' : '#059669';
-    return `<div style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:var(--bg);border-radius:10px;border-left:3px solid ${m.color}">
-      <div style="text-align:center;min-width:42px"><div style="font-family:var(--display);font-size:1.3rem;line-height:1;color:${m.color}">${s.date}</div><div style="font-size:.62rem;text-transform:uppercase;color:var(--grey)">${s.mois}</div></div>
-      <div style="flex:1"><div style="font-size:.85rem;font-weight:600">${s.type}</div><div style="font-size:.74rem;color:var(--grey)">${s.jour} · ${sanitizeDashes(s.heure)} · ${s.niveau}</div></div>
+    return `<div onclick="showParticipants('${s.date} ${s.mois}','${s.type}','${sessionIso(s)}',true,'${s.matiere}')" style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:var(--bg);border-radius:10px;border-left:3px solid ${sInfo.color};cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--ph-bg)'" onmouseout="this.style.background='var(--bg)'">
+      <div style="text-align:center;min-width:42px"><div style="font-family:var(--display);font-size:1.3rem;line-height:1;color:${sInfo.color}">${s.date}</div><div style="font-size:.62rem;text-transform:uppercase;color:var(--grey)">${s.mois}</div></div>
+      <div style="flex:1"><div style="font-size:.85rem;font-weight:600">${isAllMatieres ? sInfo.label + ' · ' : ''}${s.type}</div><div style="font-size:.74rem;color:var(--grey)">${s.jour} · ${sanitizeDashes(s.heure)} · ${s.niveau}</div></div>
       <div style="font-size:.72rem;font-weight:700;color:${col};white-space:nowrap">${full?'Complet':s.places+' pl.'}</div>
+      <span style="font-size:.72rem;font-weight:700;color:var(--ph);white-space:nowrap">Voir →</span>
     </div>`;
   }).join('') : '<p style="font-size:.85rem;color:var(--grey)">Aucune session à venir.</p>';
 
   // Bacs blancs passés (cliquables → participants)
-  document.getElementById('prof-past-list').innerHTML = passes.length ? passes.map(s => `
-    <div onclick="showParticipants('${s.date} ${s.mois}','${s.type}','${sessionIso(s)}')" style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:var(--bg);border-radius:10px;border-left:3px solid ${m.color};cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--ph-bg)'" onmouseout="this.style.background='var(--bg)'">
-      <div style="text-align:center;min-width:42px"><div style="font-family:var(--display);font-size:1.3rem;line-height:1;color:${m.color}">${s.date}</div><div style="font-size:.62rem;text-transform:uppercase;color:var(--grey)">${s.mois}</div></div>
-      <div style="flex:1"><div style="font-size:.85rem;font-weight:600">${s.type}</div><div style="font-size:.74rem;color:var(--grey)">${s.jour} · ${s.niveau}</div></div>
+  document.getElementById('prof-past-list').innerHTML = passes.length ? passes.map(s => {
+    const sInfo = MATIERE_INFO[s.matiere] || m;
+    return `
+    <div onclick="showParticipants('${s.date} ${s.mois}','${s.type}','${sessionIso(s)}',false,'${s.matiere}')" style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:var(--bg);border-radius:10px;border-left:3px solid ${sInfo.color};cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--ph-bg)'" onmouseout="this.style.background='var(--bg)'">
+      <div style="text-align:center;min-width:42px"><div style="font-family:var(--display);font-size:1.3rem;line-height:1;color:${sInfo.color}">${s.date}</div><div style="font-size:.62rem;text-transform:uppercase;color:var(--grey)">${s.mois}</div></div>
+      <div style="flex:1"><div style="font-size:.85rem;font-weight:600">${isAllMatieres ? sInfo.label + ' · ' : ''}${s.type}</div><div style="font-size:.74rem;color:var(--grey)">${s.jour} · ${s.niveau}</div></div>
       <span style="font-size:.72rem;font-weight:700;color:var(--ph);white-space:nowrap">Voir →</span>
-    </div>`).join('') : '<p style="font-size:.85rem;color:var(--grey)">Aucun bac blanc passé pour le moment.</p>';
+    </div>`;
+  }).join('') : '<p style="font-size:.85rem;color:var(--grey)">Aucun bac blanc passé pour le moment.</p>';
 
   // Vue calendrier des bacs blancs du prof
   renderProfCalendar(mine);
@@ -3167,11 +3175,40 @@ function renderProfCalendar(sessions) {
 }
 
 // Affiche les participants d'un bac blanc passé dans la carte "Participants"
-function showParticipants(dateLabel, type, iso) {
-  const m = MATIERE_INFO[currentProf.matiere] || { label: currentProf.matiere };
+function showParticipants(dateLabel, type, iso, demo, matiereKey) {
+  const key = matiereKey || currentProf.matiere;
+  const m = MATIERE_INFO[key] || { label: key };
   const sub = document.getElementById('prof-participants-sub');
   if (sub) sub.textContent = `Bac blanc ${m.label} · ${type || ''} · ${dateLabel}`;
-  renderProfInscriptions(iso);
+  renderProfInscriptions(iso, demo, key);
+  const sec = document.getElementById('prof-insc-list');
+  if (sec) setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60);
+}
+
+// ── Roster fictif (démo) : élèves + salon visio, stable par date de session ──
+const DEMO_PRENOMS = ['Emma','Lucas','Jade','Nathan','Chloé','Hugo','Léa','Gabriel','Manon','Louis'];
+const DEMO_NOMS = ['Rousseau','Bernard','Moreau','Lefebvre','Girard','Fontaine','Garnier','Dumas','Roux','Blanc'];
+function demoRoster(iso) {
+  const key = iso || 'demo';
+  const seed = key.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  const n = 4 + (seed % 3); // 4 à 6 élèves
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const pi = (seed + i * 3) % DEMO_PRENOMS.length;
+    const ni = (seed + i * 7) % DEMO_NOMS.length;
+    const nom = DEMO_PRENOMS[pi] + ' ' + DEMO_NOMS[ni];
+    const email = (DEMO_PRENOMS[pi] + '.' + DEMO_NOMS[ni]).toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '') + '@exemple.fr';
+    out.push({ nom, email, salon: 'matineesdubac-' + key + '-' + i, demo: true });
+  }
+  return out;
+}
+// Salon visio d'un participant (démo → champ salon ; réel → slug email/nom)
+function salonRoom(r) {
+  if (r.salon) return r.salon;
+  const base = (r.email || r.nom || 'eleve').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return 'matineesdubac-' + base;
 }
 
 // Date ISO (YYYY-MM-DD) d'une session du calendrier
@@ -3232,9 +3269,10 @@ function copyAffilLink() {
   });
 }
 
-async function renderProfInscriptions(filterIso) {
+async function renderProfInscriptions(filterIso, demo, matiereKey) {
   if (!currentProf) return;
-  const label = (MATIERE_INFO[currentProf.matiere] || {}).label || currentProf.matiere;
+  const key = matiereKey || currentProf.matiere;
+  const label = (MATIERE_INFO[key] || {}).label || key;
   const list = document.getElementById('prof-insc-list');
   list.innerHTML = `<p style="font-size:.82rem;color:var(--grey)">Chargement des participants…</p>`;
 
@@ -3256,11 +3294,22 @@ async function renderProfInscriptions(filterIso) {
     inscrits = inscrits.filter(r => (r.date_epreuve || '').slice(0, 10) === filterIso);
   }
 
+  // Démo : aucun inscrit réel pour ce bac blanc → roster fictif (pour montrer aux profs)
+  let estDemo = false;
+  if (!inscrits.length && demo) {
+    inscrits = demoRoster(filterIso);
+    estDemo = true;
+  }
+
   document.getElementById('prof-insc-count').textContent = inscrits.length;
 
   if (!inscrits.length) {
     list.innerHTML = `<p style="font-size:.82rem;color:var(--grey);line-height:1.5">Aucun élève inscrit pour ce bac blanc.</p>`;
     return;
+  }
+  if (estDemo) {
+    const sub = document.getElementById('prof-participants-sub');
+    if (sub) sub.textContent += ' · exemple';
   }
 
   // Statut copie par élève (match sur l'email)
@@ -3272,15 +3321,17 @@ async function renderProfInscriptions(filterIso) {
     return { txt: '⏳ À corriger', col: '#D97706', bg: '#FFF7ED' };
   }
 
+  const correctionUrl = estDemo ? 'https://crm-bacs-blancs.vercel.app/espace-prof?demo=1' : CORRECTION_URL;
   list.innerHTML = inscrits.map(r => {
-    const s = statutCopie(r.email);
-    const prenom = (r.nom || '?').split(' ')[0];
+    const s = r.demo ? { txt: 'Inscrit', col: '#2563EB', bg: '#EFF6FF' } : statutCopie(r.email);
+    const room = salonRoom(r);
     return `
     <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg);border-radius:9px">
       <div style="width:30px;height:30px;border-radius:50%;background:var(--ph-bg);color:var(--ph);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;flex-shrink:0">${(r.nom||'?')[0].toUpperCase()}</div>
       <div style="flex:1;min-width:0"><div style="font-size:.82rem;font-weight:600">${r.nom||''}</div><div style="font-size:.72rem;color:var(--grey);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.email||''}</div></div>
       <span style="font-size:.68rem;font-weight:700;color:${s.col};background:${s.bg};padding:3px 9px;border-radius:100px;white-space:nowrap">${s.txt}</span>
-      <a href="${CORRECTION_URL}" target="_blank" title="Ouvrir l'écran de correction" style="font-size:.68rem;font-weight:700;color:#fff;background:var(--ph);padding:4px 10px;border-radius:8px;text-decoration:none;white-space:nowrap">Corriger →</a>
+      <a href="https://meet.jit.si/${room}" target="_blank" rel="noreferrer" title="Rejoindre le salon visio de l'élève" style="font-size:.68rem;font-weight:700;color:#fff;background:#2563EB;padding:4px 10px;border-radius:8px;text-decoration:none;white-space:nowrap">🎥 Salon</a>
+      <a href="${correctionUrl}" target="_blank" title="Ouvrir l'écran de correction" style="font-size:.68rem;font-weight:700;color:#fff;background:var(--ph);padding:4px 10px;border-radius:8px;text-decoration:none;white-space:nowrap">Corriger →</a>
     </div>`;
   }).join('');
 }

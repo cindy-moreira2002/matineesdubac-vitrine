@@ -928,7 +928,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
     </div>
     <div class="nav-cta">
       <button class="btn btn-outline btn-sm" id="nav-cta-cal" onclick="document.body.classList.contains('univers-brevet') ? brevetGo('br-calendrier') : gotoPage('calendrier')">📅 Calendrier</button>
-      <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription" target="_blank" class="btn btn-fr btn-sm" id="nav-cta-insc">S'inscrire →</a>
+      <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-fr btn-sm" id="nav-cta-insc">S'inscrire →</a>
     </div>
   </div>
 </nav>
@@ -1264,7 +1264,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
         ${teaser3}
         <p class="body-md" style="text-align:center;margin:18px 0">${sent ? 'Ouvre ton mail pour découvrir <strong>le détail, les exemples et ton plan de travail</strong>. (Pense à vérifier tes spams !)' : ''}</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription" target="_blank" class="btn btn-fr btn-lg">Réserver mon 1er bac blanc →</a>
+          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-fr btn-lg">Réserver mon 1er bac blanc →</a>
           <button class="btn btn-outline" onclick="document.getElementById('bilan-form').scrollIntoView({behavior:'smooth'})">Tester une autre copie</button>
         </div>`;
       document.getElementById('bilan-result').scrollIntoView({behavior:'smooth', block:'center'});
@@ -2432,7 +2432,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             <li><span class="tick">✓</span> Dossier de progression reçu sous 12h</li>
             <li class="off"><span class="tick">—</span> Épreuves supplémentaires incluses</li>
           </ul>
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription" target="_blank" class="btn btn-outline cta-btn">Réserver une épreuve</a>
+          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-outline cta-btn">Réserver une épreuve</a>
         </div>
 
         <!-- Pack réussite -->
@@ -2453,7 +2453,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             <li><span class="tick">✓</span> Suivi de progression entre chaque épreuve</li>
             <li><span class="tick">✓</span> Dossiers reçus sous 12h</li>
           </ul>
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription" target="_blank" class="btn btn-ph cta-btn">Choisir le Pack réussite</a>
+          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-ph cta-btn">Choisir le Pack réussite</a>
         </div>
 
         <!-- Annuel illimité -->
@@ -2473,7 +2473,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             <li><span class="tick">✓</span> Suivi de progression complet</li>
             <li><span class="tick">✓</span> Coaching d'urgence avant le vrai bac</li>
           </ul>
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription" target="_blank" class="btn btn-dark cta-btn">Accompagnement annuel →</a>
+          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-dark cta-btn">Accompagnement annuel →</a>
         </div>
       </div>
 
@@ -3860,7 +3860,7 @@ function applyUnivers(estBrevet) {
   if (tag) tag.innerHTML = estBrevet ? BREVET_TAGLINE : BAC_TAGLINE;
   // Le bouton « S'inscrire » de la navbar mène au bon formulaire
   const insc = document.getElementById('nav-cta-insc');
-  if (insc) insc.href = CRM_URL + (estBrevet ? '/inscription?examen=brevet' : '/inscription');
+  if (insc) insc.href = CRM_URL + (estBrevet ? '/inscription?examen=brevet' : '/inscription?examen=bac');
 }
 
 // Interrupteur de la navbar

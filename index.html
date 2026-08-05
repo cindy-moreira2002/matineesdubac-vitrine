@@ -804,10 +804,9 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
   .univers-switch button{padding:7px 12px;font-size:.74rem}
   .nav-cta .btn{padding:8px 14px;font-size:.8rem}
 }
-@media(max-width:1240px){ #nav-cta-cal{display:none} }
+@media(max-width:1240px){ .nav-cta .btn{padding:8px 10px;font-size:.76rem} }
 @media(max-width:1060px){
-  #navLinks a[href*="espace-eleve"],#navLinks a[onclick*="openProfLogin"]{display:none}
-  #navLinksBrevet a[href*="espace-eleve"]{display:none}
+  .nav-cta a[href*="espace-eleve"],.nav-cta a[onclick*="openProfLogin"]{display:none}
 }
 @media(max-width:880px){
   .nav-links,#navLinks,#navLinksBrevet{display:none !important}
@@ -915,8 +914,6 @@ body.univers-brevet #navLinksBrevet{display:flex}
       <a onclick="gotoPage('tarifs')" data-page="tarifs">Les Tarifs</a>
       <a onclick="gotoPage('profs')" data-page="profs">Nos Profs</a>
       <a onclick="gotoPage('avis')" data-page="avis">Avis</a>
-      <a href="https://crm-bacs-blancs-ihgf.vercel.app/espace-eleve" target="_blank">🎓 Espace élève</a>
-      <a onclick="openProfLogin()" style="cursor:pointer">👩‍🏫 Espace prof</a>
     </div>
     <div class="nav-links" id="navLinksBrevet">
       <a onclick="brevetGo('br-concept')">Le Concept</a>
@@ -924,10 +921,10 @@ body.univers-brevet #navLinksBrevet{display:flex}
       <a onclick="brevetGo('br-calendrier')">Calendrier</a>
       <a onclick="brevetGo('br-tarifs')">Les Tarifs</a>
       <a onclick="brevetGo('br-faq')">Parents</a>
-      <a href="https://crm-bacs-blancs-ihgf.vercel.app/espace-eleve" target="_blank">🎓 Espace élève</a>
     </div>
     <div class="nav-cta">
-      <button class="btn btn-outline btn-sm" id="nav-cta-cal" onclick="document.body.classList.contains('univers-brevet') ? brevetGo('br-calendrier') : gotoPage('calendrier')">📅 Calendrier</button>
+      <a href="https://crm-bacs-blancs-ihgf.vercel.app/espace-eleve" target="_blank" class="btn btn-outline btn-sm">🎓 Espace élève</a>
+      <a onclick="openProfLogin()" class="btn btn-outline btn-sm" style="cursor:pointer">👩‍🏫 Espace prof</a>
       <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-fr btn-sm" id="nav-cta-insc">S'inscrire →</a>
     </div>
   </div>
@@ -959,7 +956,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             Bacs blancs en visio, correction par un prof expert, et un dossier de progression personnalisé pour chaque élève. Le complément qui fait vraiment la différence.
           </p>
           <div class="hero-ctas">
-            <button class="btn btn-fr btn-lg" onclick="document.getElementById('bilan-gratuit').scrollIntoView({behavior:'smooth'})">📄 Teste ta copie gratuitement →</button>
+            <button class="btn btn-fr btn-lg" onclick="gotoPage('calendrier')">📅 Voir les prochaines dates →</button>
             <button class="btn btn-outline btn-lg" onclick="gotoPage('concept')">Découvrir le concept</button>
           </div>
           <div class="hero-stats">
@@ -1025,251 +1022,6 @@ body.univers-brevet #navLinksBrevet{display:flex}
     </div>
   </div>
 
-  <!-- BILAN GRATUIT D'UNE COPIE -->
-  <section class="section" id="bilan-gratuit" style="background:linear-gradient(135deg,#FFF8F0,#F5F3FF);padding-top:56px;padding-bottom:56px">
-    <div class="container" style="max-width:920px">
-      <div style="text-align:center;margin-bottom:30px" class="reveal">
-        <div class="eyebrow" style="color:var(--fr);margin-bottom:10px">🎁 Gratuit · sans inscription</div>
-        <h2 class="section-title">Dépose ta copie,<br><span class="script-accent" style="color:var(--ph)">reçois ton bilan en 2 minutes.</span></h2>
-        <p class="body-lg" style="max-width:640px;margin:14px auto 0">Choisis ta matière, ajoute ta copie. On te dit <strong>précisément ce que tu dois travailler</strong> et <strong>combien de points tu peux gagner</strong> — pour voir concrètement l'intérêt des bacs blancs.</p>
-      </div>
-
-      <div class="bilan-box reveal" id="bilan-form">
-        <!-- Étape 1 : matière -->
-        <div class="bilan-step-lbl">1 · Ta matière</div>
-        <div class="bilan-matieres" id="bilan-matieres">
-          <button class="bilan-mat" data-m="francais" onclick="selectBilanMat(this)">Français</button>
-          <button class="bilan-mat" data-m="philo" onclick="selectBilanMat(this)">Philosophie</button>
-          <button class="bilan-mat" data-m="maths" onclick="selectBilanMat(this)">Mathématiques</button>
-          <button class="bilan-mat" data-m="histoire" onclick="selectBilanMat(this)">Histoire-Géo</button>
-          <button class="bilan-mat" data-m="hggsp" onclick="selectBilanMat(this)">HGGSP</button>
-          <button class="bilan-mat" data-m="ses" onclick="selectBilanMat(this)">SES</button>
-          <button class="bilan-mat" data-m="hlp" onclick="selectBilanMat(this)">HLP</button>
-          <button class="bilan-mat" data-m="svt" onclick="selectBilanMat(this)">SVT</button>
-        </div>
-
-        <!-- Étape 2 : copie -->
-        <div class="bilan-step-lbl" style="margin-top:24px">2 · Ta copie</div>
-        <label class="bilan-drop" id="bilan-drop" for="bilan-file">
-          <input type="file" id="bilan-file" accept=".pdf,.jpg,.jpeg,.png,.heic,.doc,.docx" style="display:none" onchange="bilanFilePicked(this)">
-          <div id="bilan-drop-text" style="font-weight:700">Clique pour ajouter ta copie</div>
-          <div style="font-size:.82rem;color:var(--grey);margin-top:4px">Photo, PDF ou capture — ou colle ton texte ci-dessous</div>
-        </label>
-        <textarea id="bilan-text" class="form-input" rows="4" placeholder="Ou colle directement le texte de ta copie ici…" style="margin-top:12px"></textarea>
-
-        <!-- Étape 3 : email -->
-        <div class="bilan-step-lbl" style="margin-top:24px">3 · Ton email — pour recevoir ton bilan 📬</div>
-        <input type="email" id="bilan-email" class="form-input" placeholder="ton@email.com — ton bilan complet y sera envoyé">
-
-        <button class="btn btn-fr btn-lg" style="width:100%;justify-content:center;margin-top:22px" onclick="genererBilan()">Recevoir mon bilan gratuit</button>
-        <p id="bilan-err" style="color:#DC2626;font-size:.85rem;text-align:center;margin-top:10px;display:none">Choisis une matière et ajoute ta copie</p>
-      </div>
-
-      <!-- Résultat -->
-      <div id="bilan-result" class="bilan-box" style="display:none;margin-top:24px"></div>
-    </div>
-  </section>
-
-  <style>
-    .bilan-box{background:white;border:1px solid var(--border);border-radius:22px;padding:34px 36px;box-shadow:0 16px 50px rgba(0,0,0,.07)}
-    .bilan-step-lbl{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ph);margin-bottom:12px}
-    .bilan-matieres{display:flex;flex-wrap:wrap;gap:10px}
-    .bilan-mat{background:white;border:1.5px solid var(--border);border-radius:100px;padding:10px 18px;font-size:.9rem;font-weight:600;color:var(--dark2);cursor:pointer;transition:all .2s}
-    .bilan-mat:hover{border-color:var(--ph-l)}
-    .bilan-mat.active{background:var(--ph);border-color:var(--ph);color:#fff}
-    .bilan-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:2px dashed var(--ph-l);border-radius:16px;padding:30px 20px;cursor:pointer;background:#FCFAFF;transition:all .2s}
-    .bilan-drop:hover{background:#F5F3FF;border-color:var(--ph)}
-    .bilan-drop.filled{border-color:var(--green);background:#F0FDF4}
-    .bilan-lever{display:flex;gap:12px;padding:14px;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;background:#fff}
-    .bilan-lever .pts{flex-shrink:0;font-family:var(--display);color:var(--green);font-size:1.1rem;white-space:nowrap}
-    .bilan-proj{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;background:linear-gradient(135deg,#1E1145,#3A1A2E);color:#fff;border-radius:16px;padding:24px;margin:18px 0}
-    .bilan-proj .score{font-family:var(--display);font-size:2rem}
-  </style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script>
-    if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    const BILAN = {
-      francais: { label:'Français', note:[12,16], leviers:[
-        ['Analyser chaque procédé en 3 étapes (procédé nommé + lien avec l\'argument + lien avec la thèse)','+2 à 3 pts'],
-        ['Définir les mots-clés du sujet dès l\'introduction','+0,5 à 1 pt'],
-        ['Consacrer une sous-partie entière à une autre œuvre (dissertation)','+1 pt'] ] },
-      philo: { label:'Philosophie', note:[10,15], leviers:[
-        ['Problématiser le sujet (au lieu de le reformuler)','+2 à 3 pts'],
-        ['Articuler références philosophiques ET exemples au sujet','+1 à 2 pts'],
-        ['Soigner les distinctions conceptuelles (définir, distinguer)','+1 pt'] ] },
-      maths: { label:'Mathématiques', note:[11,16], leviers:[
-        ['Justifier chaque étape (théorème nommé, récurrence complète)','+2 à 3 pts'],
-        ['Soigner la rédaction (quantificateurs, connecteurs, phrase de conclusion)','+1 pt'],
-        ['Vérifier la cohérence des calculs et les arrondis demandés','+1 à 2 pts'] ] },
-      histoire: { label:'Histoire-Géo', note:[10,15], leviers:[
-        ['Mobiliser des repères précis (dates, lieux, acteurs)','+1 à 2 pts'],
-        ['Structurer un plan clair avec fil conducteur','+1 à 2 pts'],
-        ['Porter un regard critique sur le document (contexte, source)','+1 à 2 pts'] ] },
-      hggsp: { label:'HGGSP', note:[10,15], leviers:[
-        ['Appuyer chaque idée sur un jalon précis (acteur, date, cas concret)','+2 pts'],
-        ['Construire une vraie problématique qui couvre tout le sujet','+1 à 2 pts'],
-        ['Analyser la source et la nature du document (approche critique)','+1 à 2 pts'] ] },
-      ses: { label:'SES', note:[10,15], leviers:[
-        ['Expliciter les mécanismes (pas seulement nommer les notions)','+2 à 3 pts'],
-        ['Lire et interpréter correctement les données chiffrées (% vs points de %)','+1 à 2 pts'],
-        ['Exploiter les documents en lien avec l\'argument','+1 pt'] ] },
-      hlp: { label:'HLP', note:[10,15], leviers:[
-        ['Problématiser la tension entre les deux notions du sujet','+2 à 3 pts'],
-        ['Mobiliser un texte patrimonial précis (auteur + œuvre + argument)','+1 à 2 pts'],
-        ['Soigner la conclusion : retour sur la question initiale + ouverture','+1 pt'] ] },
-      svt: { label:'SVT', note:[10,16], leviers:[
-        ['Structurer chaque argumentation : observation → hypothèse → résultat → conclusion','+2 à 3 pts'],
-        ['Annoter et exploiter précisément les documents (valeurs, unités, tendances)','+1 à 2 pts'],
-        ['Relier les mécanismes biologiques aux notions du programme','+1 pt'] ] },
-      oral: { label:'Oral', note:[11,16], leviers:[
-        ['Construire une ouverture qui valorise le questionnement de l\'examinateur','+2 pts'],
-        ['Articuler chaque réponse en 3 temps : position → argument → exemple','+1 à 2 pts'],
-        ['Maîtriser la présentation de l\'objet d\'étude en 2 min chrono','+1 pt'] ] }
-    };
-    let bilanMat = null;
-    let bilanImg = null, bilanImgType = null;
-    const BILAN_API = 'https://matineesdubac-production.up.railway.app/api/bilan';
-
-    function selectBilanMat(btn){
-      bilanMat = btn.dataset.m;
-      document.querySelectorAll('.bilan-mat').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-    }
-    let bilanFile = null, bilanPdfText = '';
-    async function bilanFilePicked(input){
-      const drop = document.getElementById('bilan-drop');
-      const txt = document.getElementById('bilan-drop-text');
-      bilanImg = null; bilanImgType = null; bilanFile = null; bilanPdfText = '';
-      if(input.files && input.files[0]){
-        const file = input.files[0];
-        drop.classList.add('filled');
-        if(file.type.startsWith('image/')){
-          bilanFile = file;
-          txt.innerHTML = '✅ ' + file.name;
-          readBilanImage(file);
-        } else if(file.type === 'application/pdf'){
-          txt.innerHTML = '⏳ Lecture de ' + file.name + '…';
-          try {
-            bilanPdfText = await extractPdfText(file);
-            if(bilanPdfText.length > 20){
-              txt.innerHTML = '✅ ' + file.name + ' <span style="color:#059669">— texte lu ✓</span>';
-            } else {
-              txt.innerHTML = '✅ ' + file.name + ' <span style="color:#C2410C">— ce PDF n\'a pas de texte (scan). Mets une photo ou colle le texte 👇</span>';
-            }
-          } catch(e){
-            txt.innerHTML = '✅ ' + file.name + ' <span style="color:#C2410C">— impossible de lire ce PDF, colle le texte 👇</span>';
-          }
-        } else {
-          txt.innerHTML = '✅ ' + file.name + ' <span style="color:#C2410C">— format non lu, colle plutôt le texte 👇</span>';
-        }
-      }
-    }
-    async function extractPdfText(file){
-      const buf = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({data: buf}).promise;
-      let text = '';
-      for(let i=1; i<=pdf.numPages; i++){
-        const page = await pdf.getPage(i);
-        const content = await page.getTextContent();
-        text += content.items.map(it=>it.str).join(' ') + '\n';
-      }
-      return text.trim();
-    }
-    function readBilanImage(file){
-      return new Promise(resolve => {
-        const reader = new FileReader();
-        reader.onload = e => { bilanImg = String(e.target.result).split(',')[1]; bilanImgType = file.type; resolve(true); };
-        reader.onerror = () => resolve(false);
-        reader.readAsDataURL(file);
-      });
-    }
-    function bilanErr(msg){
-      const el = document.getElementById('bilan-err');
-      el.textContent = msg; el.style.display='block';
-    }
-
-    async function genererBilan(){
-      const text = document.getElementById('bilan-text').value.trim();
-      const email = document.getElementById('bilan-email').value.trim();
-      // si une image est choisie mais pas encore lue, on la lit maintenant
-      if(bilanFile && !bilanImg) await readBilanImage(bilanFile);
-      const copie = text.length >= 20 ? text : (bilanPdfText || '');
-      if(!bilanMat){ bilanErr('👆 Choisis d\'abord ta matière (clique sur un bouton, il devient violet).'); return; }
-      if(!bilanImg && copie.length < 20){ bilanErr('Ajoute ta copie : une photo, un PDF avec du texte, ou colle quelques lignes.'); return; }
-      if(!email || !email.includes('@')){ bilanErr('📬 Mets ton email : c\'est là qu\'on t\'envoie ton bilan complet.'); return; }
-      document.getElementById('bilan-err').style.display='none';
-      const result = document.getElementById('bilan-result');
-      result.style.display='block';
-      result.innerHTML = `<div style="text-align:center;padding:20px">
-        <div style="font-size:2rem">⏳</div>
-        <p style="font-weight:700;margin-top:8px">Analyse de ta copie en cours…</p>
-        <p class="body-md">On s'occupe d'analyser ta copie et de préparer ton bilan… ~20 secondes.</p></div>`;
-      result.scrollIntoView({behavior:'smooth', block:'center'});
-
-      try {
-        const r = await fetch(BILAN_API, {
-          method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({
-            matiere: bilanMat,
-            copieTexte: copie || undefined,
-            image: bilanImg || undefined,
-            imageType: bilanImgType || undefined,
-            email: email || undefined
-          })
-        });
-        const data = await r.json();
-        if(!data.success || !data.bilan) throw new Error(data.error || 'Erreur');
-        renderBilan(data);
-      } catch(e){
-        result.innerHTML = `<div style="text-align:center;padding:10px">
-          <p style="font-weight:700;color:#DC2626">Oups, l'analyse n'a pas abouti.</p>
-          <p class="body-md">Réessaie dans un instant, ou colle directement le texte de ta copie.</p>
-          <button class="btn btn-outline" style="margin-top:10px" onclick="genererBilan()">Réessayer</button></div>`;
-      }
-    }
-
-    function renderBilan(data){
-      const b = data.bilan;
-      const email = document.getElementById('bilan-email').value.trim();
-      const nbForts = (b.pointsForts||[]).length;
-      const nbAxes = (b.axes||[]).length;
-      const gain = (b.noteCible||0) - (b.noteEstimee||0);
-      const sent = data.email && data.email.sent;
-
-      const entete = sent
-        ? `<div style="font-size:2.6rem">📬</div>
-           <h3 style="font-size:1.6rem;font-weight:800;margin:8px 0 4px">C'est fait — ton bilan est dans ta boîte mail !</h3>
-           <p class="body-lg">Va vite le voir 👀 On vient de l'envoyer à <strong>${email}</strong>.</p>`
-        : `<div style="font-size:2.6rem">✅</div>
-           <h3 style="font-size:1.6rem;font-weight:800;margin:8px 0 4px">Ton bilan est prêt !</h3>
-           <p class="body-md" style="color:#C2410C">⚠️ On n'a pas pu l'envoyer à <strong>${email}</strong> (en mode test, seule l'adresse de ton compte d'envoi fonctionne). Mais l'analyse a bien marché 👇</p>`;
-
-      const teaser1 = nbAxes > 0
-        ? `<div class="bilan-lever"><span>🔍 J'ai repéré <strong>${nbAxes} élément${nbAxes>1?'s':''}</strong> précis qui t'ont fait <strong>perdre des points</strong></span></div>` : '';
-      const teaser2 = `<div class="bilan-lever"><span>🎯 Tu as <strong>${nbAxes} axe${nbAxes>1?'s':''} de travail</strong> prioritaire${nbAxes>1?'s':''} pour remonter ta note</span></div>`;
-      const teaser3 = nbForts > 0
-        ? `<div class="bilan-lever" style="border-color:#bbf7d0"><span>✅ Et <strong>${nbForts} point${nbForts>1?'s':''} fort${nbForts>1?'s':''}</strong> que tu maîtrises déjà</span></div>` : '';
-
-      document.getElementById('bilan-result').innerHTML = `
-        <div style="text-align:center;margin-bottom:18px">${entete}</div>
-        <div class="bilan-proj" style="justify-content:center">
-          <div style="text-align:center"><div style="font-size:.8rem;opacity:.75">Potentiel repéré sur ta copie</div>
-          <div class="score" style="color:#6EE7B7">+${gain} points 🚀</div>
-          <div style="font-size:.78rem;opacity:.7">ta note exacte t'attend dans le mail 📬</div></div>
-        </div>
-        <p style="text-align:center;font-weight:700;margin:18px 0 10px">👀 Un avant-goût de ce qui t'attend :</p>
-        ${teaser1}
-        ${teaser2}
-        ${teaser3}
-        <p class="body-md" style="text-align:center;margin:18px 0">${sent ? 'Ouvre ton mail pour découvrir <strong>le détail, les exemples et ton plan de travail</strong>. (Pense à vérifier tes spams !)' : ''}</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-fr btn-lg">Réserver mon 1er bac blanc →</a>
-          <button class="btn btn-outline" onclick="document.getElementById('bilan-form').scrollIntoView({behavior:'smooth'})">Tester une autre copie</button>
-        </div>`;
-      document.getElementById('bilan-result').scrollIntoView({behavior:'smooth', block:'center'});
-    }
-  </script>
 
   <!-- MATIÈRES -->
   <section class="section">
@@ -1430,7 +1182,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
           <h2 class="section-title" style="margin-bottom:20px">Un coaching 100% à distance,<br><span class="script-accent" style="color:var(--ph)">mais 100% humain.</span></h2>
           <p class="body-lg" style="margin-bottom:24px">Pas de déplacement, pas de contrainte horaire. Ton coach est là sur écran, il voit ta copie, il t'explique, il t'encourage. Le vrai coaching adapté à ta vie d'ado.</p>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px">
-            <li style="display:flex;align-items:center;gap:10px;font-size:.9rem"><span style="color:var(--green);font-size:1.1rem">✓</span> Coaching par visio de 30 à 45 min</li>
+            <li style="display:flex;align-items:center;gap:10px;font-size:.9rem"><span style="color:var(--green);font-size:1.1rem">✓</span> Coaching par visio pendant les 4 h d'entraînement</li>
             <li style="display:flex;align-items:center;gap:10px;font-size:.9rem"><span style="color:var(--green);font-size:1.1rem">✓</span> Partage de copie annoté en direct</li>
             <li style="display:flex;align-items:center;gap:10px;font-size:.9rem"><span style="color:var(--green);font-size:1.1rem">✓</span> Planning flexible selon ton agenda</li>
           </ul>
@@ -1540,10 +1292,10 @@ body.univers-brevet #navLinksBrevet{display:flex}
           <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">Un bac blanc classique</h3>
           <p style="font-size:.82rem;color:var(--grey);margin-bottom:18px">Tu es seul, du début à la fin.</p>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
-            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:#DC2626">✗</span> Tu composes seul, tu rends ta copie.</li>
-            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:#DC2626">✗</span> Tu reçois une note, parfois un corrigé générique.</li>
-            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:#DC2626">✗</span> Tu ne sais pas vraiment <em>pourquoi</em> tu perds des points.</li>
-            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:#DC2626">✗</span> Les mêmes mauvais réflexes reviennent au bac suivant.</li>
+            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:#DC2626">✗</span><span>Tu composes seul, tu rends ta copie.</span></li>
+            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:#DC2626">✗</span><span>Tu reçois une note, parfois un corrigé générique.</span></li>
+            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:#DC2626">✗</span><span>Tu ne sais pas vraiment <em>pourquoi</em> tu perds des points.</span></li>
+            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:#DC2626">✗</span><span>Les mêmes mauvais réflexes reviennent au bac suivant.</span></li>
           </ul>
         </div>
         <!-- Bac blanc coaching -->
@@ -1553,10 +1305,10 @@ body.univers-brevet #navLinksBrevet{display:flex}
           <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">Un bac blanc coaching</h3>
           <p style="font-size:.82rem;color:var(--ph);font-weight:600;margin-bottom:18px">Tu progresses pendant l'épreuve, pas juste après.</p>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:11px">
-            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:var(--green)">✓</span> Tu composes en conditions réelles… puis on t'explique.</li>
-            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:var(--green)">✓</span> Un prof analyse <strong>ta</strong> copie et te montre exactement quoi améliorer.</li>
-            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:var(--green)">✓</span> Tu progresses <strong>au fil des bacs blancs</strong>, pas seulement à la fin.</li>
-            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:var(--green)">✓</span> Tu élimines tes mauvais réflexes un par un, avant le vrai jour J.</li>
+            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:var(--green)">✓</span><span>Tu composes en conditions réelles… puis on t'explique.</span></li>
+            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:var(--green)">✓</span><span>Un prof analyse <strong>ta</strong> copie et te montre exactement quoi améliorer.</span></li>
+            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:var(--green)">✓</span><span>Tu progresses <strong>au fil des bacs blancs</strong>, pas seulement à la fin.</span></li>
+            <li style="font-size:.88rem;color:var(--dark2);display:flex;gap:9px"><span style="color:var(--green)">✓</span><span>Tu élimines tes mauvais réflexes un par un, avant le vrai jour J.</span></li>
           </ul>
         </div>
       </div>
@@ -1603,7 +1355,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
           <div class="section-accent sa-both"></div>
           <div class="eyebrow" style="color:var(--gold);margin:16px 0 12px">Le cœur du système</div>
           <h2 class="section-title" style="margin-bottom:20px">Un dossier d'une<br><span class="script-accent" style="color:var(--ph)">précision rare.</span></h2>
-          <p class="body-lg" style="margin-bottom:24px">Pas deux lignes vagues. Un vrai document de plusieurs pages qui analyse <strong>chaque dimension</strong> de la copie : compréhension, argumentation, références, langue, méthode — avec des conseils <strong>concrets et actionnables</strong>.</p>
+          <p class="body-lg" style="margin-bottom:24px">Oublie les corrections aux annotations illisibles dans la marge. Chez les Matinées du Bac, tu reçois une <strong>vraie correction de plusieurs pages</strong> qui analyse <strong>chaque dimension</strong> de la copie : compréhension, argumentation, références, langue, méthode — avec des conseils <strong>concrets et actionnables</strong>.</p>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px">
             <li style="display:flex;gap:10px;font-size:.92rem"><span style="color:var(--green);font-size:1.1rem">✓</span> <span><strong>Note détaillée</strong> — barème critère par critère, sur 20</span></li>
             <li style="display:flex;gap:10px;font-size:.92rem"><span style="color:var(--green);font-size:1.1rem">✓</span> <span><strong>Radar de compétences</strong> noté sur 10, avec observations</span></li>
@@ -1846,12 +1598,12 @@ body.univers-brevet #navLinksBrevet{display:flex}
       </div>
       <div class="faq-list reveal">
         <details class="faq-item">
-          <summary>C'est quoi l'intérêt d'un bac blanc <em>avec coaching</em> plutôt que sans ?</summary>
+          <summary><span>C'est quoi l'intérêt d'un bac blanc <em>avec coaching</em> plutôt que sans ?</span></summary>
           <p>Un bac blanc classique donne une note… et c'est tout. Votre enfant ne sait pas vraiment <strong>pourquoi</strong> il a perdu des points, et il refait les mêmes erreurs. Avec le coaching, un prof analyse précisément sa copie, lui montre quoi corriger, et l'aide à <strong>progresser pendant la série de bacs blancs</strong> — pas juste à constater son niveau. C'est la différence entre s'entraîner seul et s'entraîner avec un coach.</p>
         </details>
         <details class="faq-item">
-          <summary>Est-ce que mon enfant va <em>vraiment</em> être coaché ?</summary>
-          <p>Oui. Pendant l'épreuve en visio, un coach suit sa copie en direct et le guide en temps réel. Après l'épreuve, il reçoit un <strong>dossier de correction personnalisé</strong> rédigé par ce même prof, avec une appréciation détaillée de <em>sa</em> copie. Ce n'est jamais un corrigé générique : tout est calibré sur ce que votre enfant a réellement écrit.</p>
+          <summary><span>Est-ce que mon enfant va <em>vraiment</em> être coaché ?</span></summary>
+          <p>Oui. Un prof expert de la matière est présent <strong>pendant toute la durée de l'examen</strong> : il suit sa copie en direct et le guide en temps réel. Dès que votre enfant a une question, il se manifeste auprès du prof et obtient une <strong>réponse immédiate</strong>. Après l'épreuve, il reçoit un <strong>dossier de correction personnalisé</strong> rédigé par ce même prof, avec une appréciation détaillée de <em>sa</em> copie. Ce n'est jamais un corrigé générique : tout est calibré sur ce que votre enfant a réellement écrit.</p>
         </details>
         <details class="faq-item">
           <summary>Un bac blanc en ligne, est-ce vraiment efficace ?</summary>
@@ -1859,7 +1611,9 @@ body.univers-brevet #navLinksBrevet{display:flex}
         </details>
         <details class="faq-item">
           <summary>Comment ça marche, techniquement ?</summary>
-          <p>Très simple, aucun logiciel à installer. Votre enfant reçoit un lien par email, il clique, et il entre dans sa salle de visio depuis un ordinateur (ou une tablette). Il compose normalement, puis transmet sa copie (photo ou fichier). Le coach le rejoint dans son salon, peut voir sa copie et lui parler. Tout se passe dans le navigateur — <strong>il suffit d'une connexion internet</strong>.</p>
+          <p>Très simple, aucun logiciel à installer. Votre enfant reçoit un lien par email, il clique, et il entre dans sa salle de visio depuis un ordinateur (ou une tablette). Le coach le rejoint dans son salon, peut voir sa copie et lui parler. Tout se passe dans le navigateur — <strong>il suffit d'une connexion internet</strong>.</p>
+          <p>Pour rédiger, dans les matières littéraires (sans calculs), deux possibilités : sur un <strong>Google Doc</strong>, si écrire à l'ordinateur ne le dérange pas ; ou <strong>à la main, grâce à une application sur son téléphone</strong> — il écrit au stylo, garde le même format que l'épreuve, et elle se passe mieux.</p>
+          <p>À la fin, il transmet sa copie (photo ou fichier), et la correction démarre.</p>
         </details>
         <details class="faq-item">
           <summary>En quoi le dossier est-il vraiment un plus ?</summary>
@@ -1867,7 +1621,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
         </details>
         <details class="faq-item">
           <summary>Y a-t-il un suivi de la progression ?</summary>
-          <p>Oui. D'un bac blanc à l'autre, on mesure l'évolution de la note et des compétences. Le dossier est mis à jour à chaque épreuve, et votre enfant voit concrètement sa courbe progresser — la plupart de nos élèves passent de 11–12 à 16–17 sur quelques bacs blancs.</p>
+          <p>Oui. D'un bac blanc à l'autre, on mesure l'évolution de la note et des compétences. Son <strong>espace élève</strong> est mis à jour après chaque épreuve : votre enfant y voit sa <strong>courbe de progression</strong>. Et son dossier de correction est directement envoyé à son professeur, qui peut suivre son évolution — la plupart de nos élèves passent de 11–12 à 16–17 sur quelques bacs blancs.</p>
         </details>
       </div>
     </div>

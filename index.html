@@ -923,9 +923,9 @@ body.univers-brevet #navLinksBrevet{display:flex}
       <a onclick="brevetGo('br-faq')">Parents</a>
     </div>
     <div class="nav-cta">
-      <a href="https://crm-bacs-blancs-ihgf.vercel.app/espace-eleve" target="_blank" class="btn btn-outline btn-sm">🎓 Espace élève</a>
+      <a href="https://espaces.matineesdubac.fr/espace-eleve" target="_blank" class="btn btn-outline btn-sm">🎓 Espace élève</a>
       <a onclick="openProfLogin()" class="btn btn-outline btn-sm" style="cursor:pointer">👩‍🏫 Espace prof</a>
-      <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-fr btn-sm" id="nav-cta-insc">S'inscrire →</a>
+      <a href="https://inscription.matineesdubac.fr/inscription?examen=bac" target="_blank" class="btn btn-fr btn-sm" id="nav-cta-insc">S'inscrire →</a>
     </div>
   </div>
 </nav>
@@ -1916,7 +1916,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             <li><span class="tick">✓</span> Dossier de progression sous 12h</li>
             <li class="off"><span class="tick">—</span> Suivi entre les épreuves</li>
           </ul>
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=brevet" target="_blank" class="btn btn-outline cta-btn">Réserver une épreuve</a>
+          <a href="https://inscription.matineesdubac.fr/inscription?examen=brevet" target="_blank" class="btn btn-outline cta-btn">Réserver une épreuve</a>
         </div>
 
         <div class="pc featured">
@@ -1935,7 +1935,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             <li><span class="tick">✓</span> Suivi de progression d'une épreuve à l'autre</li>
             <li><span class="tick">✓</span> Bilan de fin de 3<sup>e</sup> avant l'entrée en seconde</li>
           </ul>
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=brevet" target="_blank" class="btn cta-btn" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8);color:white">Choisir le Pack Brevet</a>
+          <a href="https://inscription.matineesdubac.fr/inscription?examen=brevet" target="_blank" class="btn cta-btn" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8);color:white">Choisir le Pack Brevet</a>
         </div>
 
         <div class="pc">
@@ -1953,7 +1953,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             <li><span class="tick">✓</span> Suivi de progression complet</li>
             <li><span class="tick">✓</span> Révisions intensives avant le brevet</li>
           </ul>
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=brevet" target="_blank" class="btn btn-dark cta-btn">Accompagnement annuel →</a>
+          <a href="https://inscription.matineesdubac.fr/inscription?examen=brevet" target="_blank" class="btn btn-dark cta-btn">Accompagnement annuel →</a>
         </div>
       </div>
       <p style="text-align:center;font-size:.8rem;color:var(--grey-l);margin-top:22px">Tarifs de maquette — à valider avant mise en ligne.</p>
@@ -2190,7 +2190,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             <li><span class="tick">✓</span> Dossier de progression reçu sous 12h</li>
             <li class="off"><span class="tick">—</span> Épreuves supplémentaires incluses</li>
           </ul>
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-outline cta-btn">Réserver une épreuve</a>
+          <a href="https://inscription.matineesdubac.fr/inscription?examen=bac" target="_blank" class="btn btn-outline cta-btn">Réserver une épreuve</a>
         </div>
 
         <!-- Pack réussite -->
@@ -2211,7 +2211,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             <li><span class="tick">✓</span> Suivi de progression entre chaque épreuve</li>
             <li><span class="tick">✓</span> Dossiers reçus sous 12h</li>
           </ul>
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-ph cta-btn">Choisir le Pack réussite</a>
+          <a href="https://inscription.matineesdubac.fr/inscription?examen=bac" target="_blank" class="btn btn-ph cta-btn">Choisir le Pack réussite</a>
         </div>
 
         <!-- Annuel illimité -->
@@ -2231,7 +2231,7 @@ body.univers-brevet #navLinksBrevet{display:flex}
             <li><span class="tick">✓</span> Suivi de progression complet</li>
             <li><span class="tick">✓</span> Coaching d'urgence avant le vrai bac</li>
           </ul>
-          <a href="https://crm-bacs-blancs-ihgf.vercel.app/inscription?examen=bac" target="_blank" class="btn btn-dark cta-btn">Accompagnement annuel →</a>
+          <a href="https://inscription.matineesdubac.fr/inscription?examen=bac" target="_blank" class="btn btn-dark cta-btn">Accompagnement annuel →</a>
         </div>
       </div>
 
@@ -2993,9 +2993,41 @@ const MATIERE_INFO = {
 // ── Connexion au CRM Supabase + écran de correction ──
 const PROF_SUPA_URL = 'https://orpbfnmdlvxmkvyrpvtj.supabase.co';
 const PROF_SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ycGJmbm1kbHZ4bWt2eXJwdnRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyNzI0MDksImV4cCI6MjA5Njg0ODQwOX0.vJJYkCfezKi_eg2vx40n2a7FVAP6hsiCsY0ImvIudB0';
-// CRM Next.js — mets l'URL Vercel quand déployé
-const CRM_URL = 'https://crm-bacs-blancs-ihgf.vercel.app';
+// Espaces élève / prof / admin de l'application
+const CRM_URL = 'https://espaces.matineesdubac.fr';
+// Adresse publique donnée aux élèves pour s'inscrire
+const INSCRIPTION_URL = 'https://inscription.matineesdubac.fr';
 const CORRECTION_URL = CRM_URL + '/espace-prof';
+
+// ── Lien d'affiliation des profs ──
+// Un prof partage matineesdubac.fr/?ref=SONCODE. Le code doit survivre à la
+// visite du site : sans ça, l'élève cliquait « S'inscrire » et arrivait sur le
+// formulaire sans son parrain — le prof n'était jamais payé. On mémorise le
+// code, et on le recolle sur tous les liens d'inscription au moment du clic
+// (le href peut être réécrit après coup par la bascule bac/brevet).
+const REF_CLE = 'mdb_ref';
+function refAffiliation() {
+  try {
+    const url = new URLSearchParams(location.search).get('ref');
+    if (url) localStorage.setItem(REF_CLE, url.replace(/\s+/g, '').toUpperCase());
+    return localStorage.getItem(REF_CLE) || '';
+  } catch (e) { return ''; }
+}
+function avecRef(href) {
+  const code = refAffiliation();
+  if (!code || !href || href.indexOf('/inscription') === -1 || href.indexOf('ref=') !== -1) return href;
+  return href + (href.indexOf('?') === -1 ? '?' : '&') + 'ref=' + encodeURIComponent(code);
+}
+document.addEventListener('click', function (e) {
+  const lien = e.target && e.target.closest ? e.target.closest('a[href*="/inscription"]') : null;
+  if (lien) lien.href = avecRef(lien.getAttribute('href'));
+}, true);
+document.addEventListener('DOMContentLoaded', function () {
+  refAffiliation();
+  document.querySelectorAll('a[href*="/inscription"]').forEach(function (a) {
+    a.href = avecRef(a.getAttribute('href'));
+  });
+});
 
 async function supaGet(path) {
   try {
@@ -3602,7 +3634,7 @@ async function renderProfInscriptions(filterIso, demo, matiereKey) {
     return { txt: '⏳ À corriger', col: '#D97706', bg: '#FFF7ED' };
   }
 
-  const correctionUrl = estDemo ? 'https://crm-bacs-blancs.vercel.app/espace-prof?demo=1' : CORRECTION_URL;
+  const correctionUrl = estDemo ? 'https://espaces.matineesdubac.fr/espace-prof?demo=1' : CORRECTION_URL;
   list.innerHTML = inscrits.map(r => {
     const s = r.demo ? { txt: 'Inscrit', col: '#2563EB', bg: '#EFF6FF' } : statutCopie(r.email);
     const room = salonRoom(r);
@@ -3641,7 +3673,7 @@ function applyUnivers(estBrevet) {
   if (tag) tag.innerHTML = estBrevet ? BREVET_TAGLINE : BAC_TAGLINE;
   // Le bouton « S'inscrire » de la navbar mène au bon formulaire
   const insc = document.getElementById('nav-cta-insc');
-  if (insc) insc.href = CRM_URL + (estBrevet ? '/inscription?examen=brevet' : '/inscription?examen=bac');
+  if (insc) insc.href = INSCRIPTION_URL + (estBrevet ? '/inscription?examen=brevet' : '/inscription?examen=bac');
 }
 
 // Interrupteur de la navbar
@@ -3684,7 +3716,7 @@ const BREVET_INFO = {
 };
 
 // Lien d'inscription brevet (pré-remplit examen / matière / date dans le CRM)
-const INSCRIPTION_BREVET = CRM_URL + '/inscription?examen=brevet';
+const INSCRIPTION_BREVET = INSCRIPTION_URL + '/inscription?examen=brevet';
 function lienInscriptionBrevet(s) {
   if (!s) return INSCRIPTION_BREVET;
   return `${INSCRIPTION_BREVET}&matiere=${encodeURIComponent(BREVET_INFO[s.matiere].crm)}&date=${s.iso}`;

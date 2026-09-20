@@ -877,6 +877,10 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
             <button class="btn btn-fr btn-lg" onclick="gotoPage('calendrier')">📅 Voir les prochaines dates →</button>
             <button class="btn btn-outline btn-lg" onclick="gotoPage('concept')">Découvrir le concept</button>
           </div>
+          <p style="margin-top:18px;font-size:.88rem;color:var(--dark2);line-height:1.6;max-width:480px">
+            <strong style="color:#12855A">Première matinée à 49€ au lieu de 59€.</strong> Chaque bac blanc comprend 3 à 4 h d'examen, le coaching d'un professeur particulier pendant toute l'épreuve et un dossier de correction ultra détaillé.
+            <a onclick="gotoPage('tarifs')" style="cursor:pointer;text-decoration:underline;color:var(--fr);font-weight:600">Voir toutes les formules</a>
+          </p>
           <div class="hero-stats">
             <div class="hero-stat">
               <div class="val display" style="color:var(--fr)"><span class="count" data-target="100" data-suffix="+">0</span></div>
@@ -1068,7 +1072,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
               <td>Tarif accessible</td>
               <td><span class="tick-n">✗ Cher</span></td>
               <td><span class="tick-y">✓ Gratuit</span></td>
-              <td class="col-us"><span class="tick-y">✓ Dès 69€</span></td>
+              <td class="col-us"><span class="tick-y">✓ Dès 49€</span></td>
             </tr>
           </tbody>
         </table>
@@ -1664,73 +1668,157 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
       <div style="text-align:center;margin-bottom:48px" class="reveal">
         <div class="section-accent sa-both" style="margin:0 auto 16px"></div>
         <div class="eyebrow" style="color:var(--grey);margin-bottom:12px">Les Tarifs</div>
-        <h1 class="section-title" style="margin-bottom:16px">Une formule pour chaque<br><span class="script-accent" style="color:var(--gold)">besoin et budget.</span></h1>
-        <p class="body-lg" style="max-width:480px;margin:0 auto">Passe un bac blanc quand tu en as besoin, ou accède à tout en illimité toute l'année.</p>
+        <h1 class="section-title" style="margin-bottom:16px">Deux formules,<br><span class="script-accent" style="color:var(--gold)">et des réductions simples.</span></h1>
+        <p class="body-lg" style="max-width:560px;margin:0 auto">Un bac blanc, c'est <strong>3 à 4 h d'examen en conditions réelles</strong>, un <strong>professeur particulier qui coache l'élève pendant toute l'épreuve</strong>, et un <strong>dossier de correction ultra détaillé</strong> reçu sous 12 h.</p>
       </div>
 
-      <div class="pricing-cards reveal">
-        <!-- Épreuve à l'unité -->
-        <div class="pc">
-          <div class="pc-name">Épreuve avec coaching 1-1</div>
-          <p class="pc-desc">Une épreuve complète en conditions réelles, avec un coach présent tout au long de l'examen — puis la correction et le dossier personnalisé.</p>
-          <div class="pc-price">
-            <div class="pc-amount"><span class="num" style="color:var(--fr)">69</span><span class="eur" style="color:var(--fr)">€</span></div>
-            <div class="pc-period">par épreuve</div>
-            <div class="pc-note">Sujet + coaching pendant l'examen + correction + dossier sous 12h</div>
-          </div>
-          <ul class="pc-features">
-            <li><span class="tick">✓</span> Sujet inédit calibré bac</li>
-            <li><span class="tick">✓</span> Coach présent pendant toute l'épreuve (3–4h)</li>
-            <li><span class="tick">✓</span> Coaching personnalisé 1-1 coach / élève</li>
-            <li><span class="tick">✓</span> Correction détaillée par un prof expert</li>
-            <li><span class="tick">✓</span> Dossier de progression reçu sous 12h</li>
-            <li class="off"><span class="tick">—</span> Épreuves supplémentaires incluses</li>
-          </ul>
-          <a href="https://inscription.matineesdubac.fr/inscription?examen=bac" target="_blank" class="btn btn-outline cta-btn">Réserver une épreuve</a>
-        </div>
+      <!-- ═══ CE QUI EST TOUJOURS COMPRIS ═══ -->
+      <style>
+        .inc-band{background:linear-gradient(135deg,#1E1145 0%,#2D1B5E 100%);color:#fff;border-radius:20px;padding:28px 32px;margin-bottom:40px}
+        .inc-title{font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.72;text-align:center;margin-bottom:18px}
+        .inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+        .inc-i{display:flex;gap:11px;align-items:flex-start}
+        .inc-i .ico{font-size:1.25rem;line-height:1.1}
+        .inc-i b{display:block;font-size:.92rem;margin-bottom:3px}
+        .inc-i span.d{font-size:.8rem;opacity:.78;line-height:1.5}
+        @media(max-width:760px){ .inc-grid{grid-template-columns:1fr} .inc-band{padding:24px 20px} }
 
-        <!-- Pack réussite -->
-        <div class="pc featured">
-          <div class="pop-badge">Le plus populaire</div>
-          <div class="pc-name">Pack réussite</div>
-          <p class="pc-desc">3 bacs blancs écrits + 1 oral pour un entraînement complet jusqu'au jour J. Le combo gagnant.</p>
-          <div class="pc-price">
-            <div class="pc-amount"><span class="num" style="color:var(--ph)">259</span><span class="eur" style="color:var(--ph)">€</span></div>
-            <div class="pc-period">le pack · au lieu de 280€</div>
-            <div class="pc-note">Économie de 21€ sur le prix réel</div>
-          </div>
-          <ul class="pc-features">
-            <li><span class="tick">✓</span> 3 épreuves écrites au choix</li>
-            <li><span class="tick">✓</span> 1 préparation à l'oral incluse</li>
-            <li><span class="tick">✓</span> Coach 1-1 pendant chaque épreuve</li>
-            <li><span class="tick">✓</span> 4 corrections + 4 dossiers personnalisés</li>
-            <li><span class="tick">✓</span> Suivi de progression entre chaque épreuve</li>
-            <li><span class="tick">✓</span> Dossiers reçus sous 12h</li>
-          </ul>
-          <a href="https://inscription.matineesdubac.fr/inscription?examen=bac" target="_blank" class="btn btn-ph cta-btn">Choisir le Pack réussite</a>
-        </div>
+        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:780px;margin:0 auto}
+        .form-c{background:white;border:1.5px solid var(--border);border-radius:20px;padding:28px;text-align:center;display:flex;flex-direction:column;transition:all .25s}
+        .form-c:hover{transform:translateY(-3px);box-shadow:0 12px 34px rgba(0,0,0,.08)}
+        .form-c .fc-name{font-weight:800;font-size:1.05rem;margin-bottom:6px;color:var(--dark)}
+        .form-c .fc-amount{font-family:var(--display);font-size:3rem;line-height:1;margin:8px 0 4px}
+        .form-c .fc-unit{font-size:.82rem;color:var(--grey);font-weight:600;margin-bottom:12px}
+        .form-c .fc-desc{font-size:.85rem;color:var(--grey);line-height:1.6;flex:1;margin-bottom:18px}
+        .form-c .fc-save{display:inline-block;background:#E8F7EF;color:#12855A;font-size:.74rem;font-weight:800;border-radius:999px;padding:4px 11px;margin-bottom:12px}
+        @media(max-width:760px){ .form-grid{grid-template-columns:1fr} }
 
-        <!-- Annuel illimité -->
-        <div class="pc">
-          <div class="pc-name">Accompagnement annuel</div>
-          <p class="pc-desc">Bacs blancs illimités toute l'année scolaire — au prix d'un seul cours particulier par mois.</p>
-          <div class="pc-price">
-            <div class="pc-amount"><span class="num" style="color:var(--gold)">499</span><span class="eur" style="color:var(--gold)">€</span></div>
-            <div class="pc-period">par an · soit 41€/mois</div>
-            <div class="pc-note">Le prix d'un cours particulier — pour un accompagnement illimité</div>
-          </div>
-          <ul class="pc-features">
-            <li><span class="tick">✓</span> Épreuves illimitées toute l'année</li>
-            <li><span class="tick">✓</span> Toutes les matières couvertes</li>
-            <li><span class="tick">✓</span> Coach 1-1 à chaque épreuve</li>
-            <li><span class="tick">✓</span> Corrections + dossiers illimités sous 12h</li>
-            <li><span class="tick">✓</span> Suivi de progression complet</li>
-            <li><span class="tick">✓</span> Coaching d'urgence avant le vrai bac</li>
-          </ul>
-          <a href="https://inscription.matineesdubac.fr/inscription?examen=bac" target="_blank" class="btn btn-dark cta-btn">Accompagnement annuel →</a>
+        .first-band{margin:34px auto 0;max-width:780px;background:linear-gradient(135deg,#E8F7EF 0%,#FFF8F0 100%);border:1.5px solid #B9E6CE;border-radius:20px;padding:26px 30px;text-align:center}
+        .first-band .fb-k{font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#12855A;margin-bottom:10px}
+        .first-band .fb-p{font-family:var(--display);font-size:2.4rem;line-height:1;color:#12855A}
+        .first-band .fb-p s{font-size:1.2rem;color:var(--grey-l);font-weight:400;margin-left:10px}
+        .first-band .fb-d{font-size:.88rem;color:var(--dark2);line-height:1.6;margin-top:10px;max-width:520px;margin-left:auto;margin-right:auto}
+
+        .promo-wrap{margin-top:56px;background:white;border:1px solid var(--border);border-radius:20px;padding:36px}
+        .promo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;margin-top:26px}
+        .promo-c{border:1.5px solid var(--border);border-radius:16px;padding:20px;background:var(--bg);display:flex;flex-direction:column;transition:all .25s}
+        .promo-c:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.07)}
+        .promo-top{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+        .promo-price{font-family:var(--display);font-size:2.1rem;line-height:1}
+        .promo-unit{font-size:.78rem;color:var(--grey);font-weight:600}
+        .promo-name{font-weight:700;font-size:.95rem;margin-bottom:6px;color:var(--dark)}
+        .promo-txt{font-size:.83rem;color:var(--grey);line-height:1.55;flex:1}
+        .promo-code{margin-top:14px;font-size:.72rem;color:var(--dark2);background:white;border:1px dashed var(--border);border-radius:8px;padding:7px 10px;display:flex;align-items:center;gap:7px}
+        .promo-code b{font-family:var(--body);letter-spacing:.08em;font-weight:800;color:var(--dark)}
+        .promo-sub{font-size:.73rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-l);margin:30px 0 -2px;display:flex;align-items:center;gap:12px}
+        .promo-sub::after{content:'';flex:1;height:1px;background:var(--border)}
+        .promo-rule{margin-top:22px;font-size:.8rem;color:var(--grey);text-align:center;background:var(--cream);border-radius:12px;padding:12px 16px}
+        @media(max-width:760px){ .promo-wrap{padding:24px 18px} .promo-grid{grid-template-columns:1fr} }
+      </style>
+
+      <div class="inc-band reveal">
+        <div class="inc-title">Compris dans chaque bac blanc, quel que soit le prix payé</div>
+        <div class="inc-grid">
+          <div class="inc-i"><span class="ico">🕐</span><div><b>3 à 4 h d'examen</b><span class="d">Sujet inédit calibré bac, en conditions réelles, comme le jour J.</span></div></div>
+          <div class="inc-i"><span class="ico">🎧</span><div><b>Un prof particulier pendant toute l'épreuve</b><span class="d">Il passe voir la copie toutes les 15–20 min et coache l'élève pendant qu'il écrit.</span></div></div>
+          <div class="inc-i"><span class="ico">📗</span><div><b>Un dossier de correction ultra détaillé</b><span class="d">Rédigé sur la copie de l'élève, reçu sous 12 h.</span></div></div>
         </div>
       </div>
 
+      <!-- ═══ 1. LES FORMULES ═══ -->
+      <div style="text-align:center;margin-bottom:22px" class="reveal">
+        <h2 style="font-family:var(--display);font-size:1.6rem;margin-bottom:6px">Les deux formules</h2>
+        <p class="body-md">C'est tout. Le reste, ce sont des réductions qui s'appliquent sur ces prix.</p>
+      </div>
+
+      <div class="form-grid reveal">
+        <div class="form-c">
+          <div class="fc-name">Un bac blanc</div>
+          <div class="fc-amount" style="color:var(--fr)">59€</div>
+          <div class="fc-unit">la matinée · 1 matière</div>
+          <p class="fc-desc">Une épreuve complète, coaching pendant l'examen et dossier de correction compris.</p>
+          <a href="https://inscription.matineesdubac.fr/inscription?examen=bac" target="_blank" class="btn btn-fr cta-btn">Réserver un bac blanc</a>
+        </div>
+        <div class="form-c">
+          <div class="fc-name">Duo de matières</div>
+          <div class="fc-amount" style="color:var(--ph)">89€</div>
+          <div class="fc-unit">les 2 matières · 44,50€ la matinée</div>
+          <span class="fc-save">Au lieu de 118€ · −29€</span>
+          <p class="fc-desc">Deux matières différentes réservées ensemble, chacune avec son coaching et son dossier.</p>
+          <a href="https://inscription.matineesdubac.fr/inscription?examen=bac&amp;code=DUO89" target="_blank" class="btn btn-ph cta-btn">Réserver un duo</a>
+        </div>
+      </div>
+
+      <!-- ═══ 2. PREMIÈRE MATINÉE ═══ -->
+      <div class="first-band reveal">
+        <div class="fb-k">Votre toute première matinée</div>
+        <div class="fb-p">49€ <s>59€</s></div>
+        <p class="fb-d">Le premier bac blanc est <strong>toujours à 49€</strong>, pour tout nouvel élève. Rien à saisir : la remise s'applique automatiquement à l'inscription — que vous veniez par vous-même ou avec le lien de votre professeur particulier.</p>
+      </div>
+
+      <!-- ═══ 3. LES OPTIONS ═══ -->
+      <div class="promo-wrap reveal">
+        <h3 style="text-align:center;font-size:1.2rem;font-weight:700;margin-bottom:8px">Les options pour payer moins cher</h3>
+        <p class="body-md" style="text-align:center;max-width:540px;margin:0 auto">Elles ne sont pas obligatoires. Prenez celle qui correspond à votre situation — le prix indiqué est celui que vous payez vraiment.</p>
+
+        <div class="promo-sub">Vous venez à plusieurs</div>
+        <div class="promo-grid">
+
+          <div class="promo-c">
+            <div class="promo-top"><span class="promo-price" style="color:var(--ph)">49€</span><span class="promo-unit">la matinée</span></div>
+            <div class="promo-name">Parrainage entre élèves</div>
+            <p class="promo-txt">Un élève invite un ami : l'ami paie <strong>49€</strong> sa première matinée, et l'élève qui a parrainé reçoit <strong>−10€</strong> sur sa matinée suivante.</p>
+            <div class="promo-code"><span style="font-weight:700;color:var(--grey-l)">CODE</span> <b>PARRAIN10</b></div>
+          </div>
+
+          <div class="promo-c">
+            <div class="promo-top"><span class="promo-price" style="color:var(--green)">39€</span><span class="promo-unit">par personne</span></div>
+            <div class="promo-name">Groupe de 3 amis et plus</div>
+            <p class="promo-txt">Vous vous inscrivez <strong>à 3 ou plus sur la même matinée</strong> : chacun paie 39€ au lieu de 59€.</p>
+            <div class="promo-code"><span style="font-weight:700;color:var(--grey-l)">CODE</span> <b>TRIO39</b></div>
+          </div>
+
+        </div>
+
+        <div class="promo-sub">Vous réservez plusieurs matinées d'un coup</div>
+        <div class="promo-grid">
+
+          <div class="promo-c">
+            <div class="promo-top"><span class="promo-price" style="color:var(--fr-d)">89€</span><span class="promo-unit">les 2 matières</span></div>
+            <div class="promo-name">Duo de matières</div>
+            <p class="promo-txt">2 matières différentes réservées ensemble — <strong>44,50€ la matinée</strong>. Au lieu de 118€.</p>
+            <div class="promo-code"><span style="font-weight:700;color:var(--grey-l)">CODE</span> <b>DUO89</b></div>
+          </div>
+
+          <div class="promo-c">
+            <div class="promo-top"><span class="promo-price" style="color:var(--gold)">139€</span><span class="promo-unit">les 3 matinées</span></div>
+            <div class="promo-name">Pack fidélité 3</div>
+            <p class="promo-txt">3 matinées prépayées, à utiliser quand vous voulez dans l'année — <strong>47€ la matinée</strong>. Au lieu de 177€.</p>
+            <div class="promo-code"><span style="font-weight:700;color:var(--grey-l)">CODE</span> <b>FIDELITE3</b></div>
+          </div>
+
+          <div class="promo-c">
+            <div class="promo-top"><span class="promo-price" style="color:var(--fr)">199€</span><span class="promo-unit">les 5 matinées</span></div>
+            <div class="promo-name">Pack fidélité 5</div>
+            <p class="promo-txt">5 matinées prépayées, matières au choix — <strong>39,80€ la matinée, notre meilleur prix</strong>. Au lieu de 295€.</p>
+            <div class="promo-code"><span style="font-weight:700;color:var(--grey-l)">CODE</span> <b>FIDELITE5</b></div>
+          </div>
+
+        </div>
+
+        <div class="promo-sub">Après votre première matinée</div>
+        <div class="promo-grid">
+
+          <div class="promo-c" style="grid-column:1/-1">
+            <div class="promo-top"><span class="promo-price" style="color:var(--gold)">Ambassadeur</span></div>
+            <div class="promo-name">L'élève fait profiter ses amis</div>
+            <p class="promo-txt">Après sa première matinée, l'élève reçoit <strong>3 codes −10€</strong> à donner autour de lui. Pour chaque ami qui s'inscrit avec l'un de ces codes, il gagne <strong>5€ de crédit</strong> sur sa prochaine matinée. Les codes arrivent par email, rien à demander.</p>
+          </div>
+
+        </div>
+
+        <p class="promo-rule">Une seule réduction à la fois : c'est toujours <strong>la plus avantageuse</strong> qui s'applique. Le code se saisit au moment de l'inscription, avant le paiement.</p>
+      </div>
       <!-- Comparatif plateformes -->
       <div style="margin-top:56px;background:white;border:1px solid var(--border);border-radius:20px;padding:36px" class="reveal">
         <h3 style="text-align:center;font-size:1.2rem;font-weight:700;margin-bottom:8px">Pourquoi pas un stage en ligne ?</h3>
@@ -1768,7 +1856,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
               <tr>
                 <td>Tarif</td>
                 <td><span style="color:var(--dark2)">~250€ le stage</span></td>
-                <td class="col-us"><span class="tick-y">Dès 69€ l'épreuve</span></td>
+                <td class="col-us"><span class="tick-y">Dès 49€ l'épreuve</span></td>
               </tr>
             </tbody>
           </table>
@@ -1784,7 +1872,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
           </div>
           <div class="card">
             <h4 style="margin-bottom:8px;font-size:.95rem">Peut-on faire plusieurs matières ?</h4>
-            <p class="body-md">Oui. L'accompagnement annuel couvre toutes les matières. Le pack réussite est à choisir par matière ou à combiner.</p>
+            <p class="body-md">Oui, autant que vous voulez. Le <strong>duo de matières</strong> (89€) et les <strong>packs fidélité 3 et 5</strong> sont faits pour ça : les matinées se répartissent librement entre les matières et dans l'année.</p>
           </div>
           <div class="card">
             <h4 style="margin-bottom:8px;font-size:.95rem">Délai pour recevoir le dossier ?</h4>

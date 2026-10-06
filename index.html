@@ -1528,7 +1528,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
         <button class="filter-btn active" data-matiere="all" onclick="filterCalendar('all',this)">Toutes les matières</button>
         <button class="filter-btn" data-matiere="francais" onclick="filterCalendar('francais',this)">Français</button>
         <button class="filter-btn" data-matiere="philo" onclick="filterCalendar('philo',this)">Philo</button>
-        <button class="filter-btn" data-matiere="histoire" onclick="filterCalendar('histoire',this)">Histoire-Géo</button>
         <button class="filter-btn" data-matiere="maths" onclick="filterCalendar('maths',this)">Maths</button>
         <button class="filter-btn" data-matiere="hggsp" onclick="filterCalendar('hggsp',this)">HGGSP</button>
         <button class="filter-btn" data-matiere="ses" onclick="filterCalendar('ses',this)">SES</button>
@@ -1623,7 +1622,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.85);padding:60px 0 28px;ma
                   <option value="">Choisir…</option>
                   <option value="francais">Français</option>
                   <option value="philo">Philosophie</option>
-                  <option value="histoire">Histoire-Géo</option>
                   <option value="maths">Mathématiques</option>
                   <option value="hggsp">HGGSP</option>
                   <option value="ses">SES</option>
@@ -2769,22 +2767,57 @@ async function supaGet(path) {
     return r.ok ? await r.json() : null; // null = erreur (ex: colonne absente)
   } catch (e) { return null; }
 }
+// Calendrier public des bacs blancs (semaine comme week-end), plusieurs matières
+// possibles le même jour. Jamais plus de PLACES_MAX élèves par épreuve : le
+// nombre de places affiché est plafonné à 12, quoi qu'on écrive ci-dessous.
+// Le jour de la semaine, le jour et le mois se déduisent de la date ISO.
+const PLACES_MAX = 12;
+const JOURS_FR = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+const MOIS_COURTS = ['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
 const SESSIONS = [
-  { matiere:'francais', date:'31', mois:'Oct',  jour:'Samedi', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:8, total:20 },
-  { matiere:'philo',    date:'07', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Dissertation', niveau:'Terminale', places:14, total:20 },
-  { matiere:'maths',    date:'14', mois:'Nov',  jour:'Samedi', heure:'9h00 — 12h00', type:'Sujet type bac', niveau:'Terminale', places:5, total:20 },
-  { matiere:'histoire', date:'21', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Composition & étude doc', niveau:'Terminale', places:17, total:20 },
-  { matiere:'hggsp',   date:'21', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Composition & analyse de doc', niveau:'Terminale', places:18, total:20 },
-  { matiere:'ses',      date:'28', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Dissertation & épreuve composée', niveau:'Terminale', places:16, total:20 },
-  { matiere:'francais', date:'28', mois:'Nov',  jour:'Samedi', heure:'9h00 — 13h00', type:'Analyse linéaire & oral', niveau:'Première', places:11, total:20 },
-  { matiere:'hlp',      date:'05', mois:'Déc',  jour:'Samedi', heure:'9h00 — 13h00', type:'Essai & étude de textes', niveau:'Terminale', places:18, total:20 },
-  { matiere:'philo',    date:'05', mois:'Déc',  jour:'Samedi', heure:'9h00 — 13h00', type:'Explication de texte', niveau:'Terminale', places:9, total:20 },
-  { matiere:'svt',      date:'12', mois:'Déc',  jour:'Samedi', heure:'9h00 — 12h00', type:'Exploitation de documents & synthèse', niveau:'Terminale', places:18, total:20 },
-  { matiere:'oral',     date:'12', mois:'Déc',  jour:'Samedi', heure:'14h00 — 16h00', type:'Présentation objet d\'étude + entretien', niveau:'Première / Terminale', places:12, total:15 },
-  { matiere:'maths',    date:'19', mois:'Déc',  jour:'Samedi', heure:'9h00 — 12h00', type:'Révisions intensives', niveau:'Terminale', places:20, total:20 },
-  { matiere:'histoire', date:'09', mois:'Janv', jour:'Samedi', heure:'9h00 — 13h00', type:'Composition', niveau:'Terminale', places:20, total:20 },
-  { matiere:'ses',      date:'09', mois:'Janv', jour:'Samedi', heure:'9h00 — 13h00', type:'Révisions rentrée', niveau:'Terminale', places:20, total:20 }
-];
+  // Bacs blancs d'octobre 2026 (dates confirmées)
+  { iso:'2026-10-22', matiere:'francais', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:12 },
+  { iso:'2026-10-23', matiere:'francais', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:12 },
+  { iso:'2026-10-24', matiere:'hggsp',    heure:'9h00 — 13h00', type:'Composition & analyse de doc', niveau:'Terminale', places:12 },
+  { iso:'2026-10-25', matiere:'maths',    heure:'9h00 — 13h00', type:'Sujet type bac', niveau:'Terminale', places:12 },
+  { iso:'2026-10-26', matiere:'francais', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:12 },
+  { iso:'2026-10-31', matiere:'francais', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:8 },
+  { iso:'2026-10-31', matiere:'maths',    heure:'9h00 — 13h00', type:'Sujet type bac', niveau:'Terminale', places:5 },
+  { iso:'2026-11-08', matiere:'philo',    heure:'9h00 — 13h00', type:'Dissertation', niveau:'Terminale', places:10 },
+  { iso:'2026-11-08', matiere:'ses',      heure:'9h00 — 13h00', type:'Dissertation & épreuve composée', niveau:'Terminale', places:12 },
+  { iso:'2026-11-14', matiere:'hggsp',    heure:'9h00 — 13h00', type:'Composition & analyse de doc', niveau:'Terminale', places:11 },
+  { iso:'2026-11-14', matiere:'svt',      heure:'9h00 — 12h30', type:'Exploitation de documents & synthèse', niveau:'Terminale', places:12 },
+  { iso:'2026-11-15', matiere:'maths',    heure:'9h00 — 13h00', type:'Sujet type bac', niveau:'Terminale', places:9 },
+  { iso:'2026-11-15', matiere:'hlp',      heure:'9h00 — 13h00', type:'Essai & étude de textes', niveau:'Terminale', places:12 },
+  { iso:'2026-11-21', matiere:'francais', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:7 },
+  { iso:'2026-11-21', matiere:'philo',    heure:'9h00 — 13h00', type:'Explication de texte', niveau:'Terminale', places:12 },
+  { iso:'2026-11-22', matiere:'ses',      heure:'9h00 — 13h00', type:'Dissertation & épreuve composée', niveau:'Terminale', places:12 },
+  { iso:'2026-11-22', matiere:'hggsp',    heure:'9h00 — 13h00', type:'Composition & analyse de doc', niveau:'Terminale', places:12 },
+  { iso:'2026-11-28', matiere:'maths',    heure:'9h00 — 13h00', type:'Sujet type bac', niveau:'Terminale', places:11 },
+  { iso:'2026-11-28', matiere:'svt',      heure:'9h00 — 12h30', type:'Exploitation de documents & synthèse', niveau:'Terminale', places:12 },
+  { iso:'2026-11-29', matiere:'francais', heure:'9h00 — 13h00', type:'Analyse linéaire & oral', niveau:'Première', places:10 },
+  { iso:'2026-11-29', matiere:'philo',    heure:'9h00 — 13h00', type:'Dissertation', niveau:'Terminale', places:12 },
+  { iso:'2026-12-05', matiere:'hlp',      heure:'9h00 — 13h00', type:'Essai & étude de textes', niveau:'Terminale', places:12 },
+  { iso:'2026-12-05', matiere:'ses',      heure:'9h00 — 13h00', type:'Dissertation & épreuve composée', niveau:'Terminale', places:12 },
+  { iso:'2026-12-06', matiere:'francais', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:12 },
+  { iso:'2026-12-06', matiere:'maths',    heure:'9h00 — 13h00', type:'Sujet type bac', niveau:'Terminale', places:12 },
+  { iso:'2026-12-12', matiere:'svt',      heure:'9h00 — 12h30', type:'Exploitation de documents & synthèse', niveau:'Terminale', places:12 },
+  { iso:'2026-12-12', matiere:'philo',    heure:'9h00 — 13h00', type:'Explication de texte', niveau:'Terminale', places:12 },
+  { iso:'2026-12-12', matiere:'oral',     heure:'14h00 — 16h00', type:'Présentation objet d\'étude + entretien', niveau:'Première / Terminale', places:12 },
+  { iso:'2026-12-13', matiere:'hggsp',    heure:'9h00 — 13h00', type:'Composition & analyse de doc', niveau:'Terminale', places:12 },
+  { iso:'2026-12-13', matiere:'francais', heure:'9h00 — 13h00', type:'Analyse linéaire & oral', niveau:'Première', places:12 },
+  { iso:'2026-12-19', matiere:'maths',    heure:'9h00 — 13h00', type:'Révisions intensives', niveau:'Terminale', places:12 },
+  { iso:'2026-12-19', matiere:'ses',      heure:'9h00 — 13h00', type:'Révisions intensives', niveau:'Terminale', places:12 },
+  { iso:'2027-01-09', matiere:'philo',    heure:'9h00 — 13h00', type:'Dissertation', niveau:'Terminale', places:12 },
+  { iso:'2027-01-09', matiere:'ses',      heure:'9h00 — 13h00', type:'Révisions rentrée', niveau:'Terminale', places:12 },
+  { iso:'2027-01-10', matiere:'francais', heure:'9h00 — 13h00', type:'Commentaire & dissertation', niveau:'Première', places:12 },
+  { iso:'2027-01-10', matiere:'maths',    heure:'9h00 — 13h00', type:'Sujet type bac', niveau:'Terminale', places:12 }
+].map(s => {
+  const [y, mo, d] = s.iso.split('-').map(Number);
+  const places = Math.max(0, Math.min(Number(s.places) || 0, PLACES_MAX));
+  return { ...s, annee: y, mois: MOIS_COURTS[mo - 1], date: String(d).padStart(2, '0'),
+    jour: JOURS_FR[new Date(y, mo - 1, d).getDay()], places, total: PLACES_MAX };
+});
 
 function renderCalendar(filter) {
   const grid = document.getElementById('calendar-grid');
@@ -2794,7 +2827,7 @@ function renderCalendar(filter) {
     const m = MATIERE_INFO[s.matiere];
     const pct = Math.round((1 - s.places / s.total) * 100);
     const full = s.places === 0;
-    const almost = s.places <= 6 && s.places > 0;
+    const almost = s.places <= 4 && s.places > 0;
     const spotColor = full ? '#DC2626' : almost ? '#D97706' : '#059669';
     const spotLabel = full ? 'Complet' : `${s.places} places restantes`;
     return `
@@ -2840,44 +2873,57 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDossier
 
 // ── Vue mensuelle ──
 const MOIS_NUM = { 'Janv':0,'Févr':1,'Mars':2,'Avr':3,'Mai':4,'Juin':5,'Juil':6,'Août':7,'Sept':8,'Oct':9,'Nov':10,'Déc':11 };
-const MOIS_LABEL = { 'Juin':'Juin','Juil':'Juillet','Août':'Août','Sept':'Septembre' };
-const CAL_YEAR = 2026;
+const MOIS_LABEL = { 'Janv':'Janvier','Févr':'Février','Avr':'Avril','Juin':'Juin','Juil':'Juillet','Août':'Août','Sept':'Septembre','Oct':'Octobre','Nov':'Novembre','Déc':'Décembre' };
+// Mois (dans l'ordre, année comprise) où tombe au moins une session de la liste.
+function moisDuCalendrier(list) {
+  const vus = new Map();
+  list.forEach(s => { const k = s.annee * 100 + MOIS_NUM[s.mois]; if (!vus.has(k)) vus.set(k, { annee: s.annee, mois: s.mois }); });
+  return [...vus.entries()].sort((a, b) => a[0] - b[0]).map(e => e[1]);
+}
+// Sessions d'un mois, rangées par jour : { 31: [français, maths], … }
+function sessionsParJour(list, annee, mois) {
+  const byDay = {};
+  list.filter(s => s.annee === annee && s.mois === mois).forEach(s => {
+    (byDay[parseInt(s.date, 10)] ||= []).push(s);
+  });
+  return byDay;
+}
 let calView = 'list';
 
 function renderMonthView(filter) {
   const cont = document.getElementById('calendar-month');
   if (!cont) return;
   const list = filter === 'all' ? SESSIONS : SESSIONS.filter(s => s.matiere === filter);
-  const months = [];
-  list.forEach(s => { if (!months.includes(s.mois)) months.push(s.mois); });
-  months.sort((a, b) => MOIS_NUM[a] - MOIS_NUM[b]);
-
-  const html = months.map(mois => {
+  const html = moisDuCalendrier(list).map(({ annee, mois }) => {
     const mi = MOIS_NUM[mois];
-    let startDow = new Date(CAL_YEAR, mi, 1).getDay(); // 0=Dim
-    startDow = (startDow + 6) % 7;                       // Lun=0
-    const daysInMonth = new Date(CAL_YEAR, mi + 1, 0).getDate();
-    const byDay = {};
-    list.filter(s => s.mois === mois).forEach(s => { byDay[parseInt(s.date, 10)] = s; });
+    let startDow = new Date(annee, mi, 1).getDay(); // 0=Dim
+    startDow = (startDow + 6) % 7;                   // Lun=0
+    const daysInMonth = new Date(annee, mi + 1, 0).getDate();
+    const byDay = sessionsParJour(list, annee, mois);
 
     let cells = '';
     for (let i = 0; i < startDow; i++) cells += `<div class="mv-cell mv-empty"></div>`;
     for (let d = 1; d <= daysInMonth; d++) {
-      const s = byDay[d];
-      if (s) {
-        const m = MATIERE_INFO[s.matiere];
-        const full = s.places === 0;
-        cells += `<div class="mv-cell mv-has" style="border-color:${m.color}" onclick="preselectSession('${s.matiere}','${s.date} ${s.mois}')" title="${m.label} — ${s.type}">
+      const jourS = byDay[d];
+      if (jourS) {
+        // Plusieurs matières possibles le même jour : une pastille cliquable chacune.
+        const pastilles = jourS.map(s => {
+          const m = MATIERE_INFO[s.matiere];
+          const full = s.places === 0;
+          return `<span class="mv-chip" style="background:${m.grad};cursor:pointer" onclick="event.stopPropagation();preselectSession('${s.matiere}','${s.date} ${s.mois}')" title="${m.label} — ${s.type}">${m.icon} ${m.label}</span>
+          <span class="mv-spots" style="color:${full ? '#DC2626' : '#059669'}">${full ? 'Complet' : s.places + ' pl.'}</span>`;
+        }).join('');
+        const m0 = MATIERE_INFO[jourS[0].matiere];
+        cells += `<div class="mv-cell mv-has" style="border-color:${jourS.length > 1 ? 'var(--ph)' : m0.color}" onclick="preselectSession('${jourS[0].matiere}','${jourS[0].date} ${jourS[0].mois}')">
           <span class="mv-day">${d}</span>
-          <span class="mv-chip" style="background:${m.grad}">${m.icon} ${m.label}</span>
-          <span class="mv-spots" style="color:${full ? '#DC2626' : '#059669'}">${full ? 'Complet' : s.places + ' pl.'}</span>
+          ${pastilles}
         </div>`;
       } else {
         cells += `<div class="mv-cell"><span class="mv-day mv-dim">${d}</span></div>`;
       }
     }
     return `<div class="mv-month">
-      <h3 class="mv-title">${MOIS_LABEL[mois] || mois} ${CAL_YEAR}</h3>
+      <h3 class="mv-title">${MOIS_LABEL[mois] || mois} ${annee}</h3>
       <div class="mv-dows"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
       <div class="mv-grid">${cells}</div>
     </div>`;
@@ -3132,7 +3178,7 @@ function initProfDashboard() {
   // Sépare les sessions de sa matière en à venir / passées
   document.getElementById('prof-planning-matiere').textContent = m.label;
   const today = new Date(); today.setHours(0, 0, 0, 0);
-  const sessionDate = (s) => new Date(CAL_YEAR, MOIS_NUM[s.mois], parseInt(s.date, 10));
+  const sessionDate = (s) => new Date(s.annee, MOIS_NUM[s.mois], parseInt(s.date, 10));
   const isAllMatieres = currentProf.matiere === 'all';
   const mine = isAllMatieres ? SESSIONS : SESSIONS.filter(s => s.matiere === currentProf.matiere);
   const futurs = mine.filter(s => sessionDate(s) >= today);
@@ -3142,7 +3188,7 @@ function initProfDashboard() {
   document.getElementById('prof-planning-list').innerHTML = futurs.length ? futurs.map(s => {
     const sInfo = MATIERE_INFO[s.matiere] || m;
     const full = s.places === 0;
-    const col = full ? '#DC2626' : s.places <= 6 ? '#D97706' : '#059669';
+    const col = full ? '#DC2626' : s.places <= 4 ? '#D97706' : '#059669';
     return `<div onclick="showParticipants('${s.date} ${s.mois}','${s.type}','${sessionIso(s)}',true,'${s.matiere}')" style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:var(--bg);border-radius:10px;border-left:3px solid ${sInfo.color};cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--ph-bg)'" onmouseout="this.style.background='var(--bg)'">
       <div style="text-align:center;min-width:42px"><div style="font-family:var(--display);font-size:1.3rem;line-height:1;color:${sInfo.color}">${s.date}</div><div style="font-size:.62rem;text-transform:uppercase;color:var(--grey)">${s.mois}</div></div>
       <div style="flex:1"><div style="font-size:.85rem;font-weight:600">${isAllMatieres ? sInfo.label + ' · ' : ''}${s.type}</div><div style="font-size:.74rem;color:var(--grey)">${s.jour} · ${sanitizeDashes(s.heure)} · ${s.niveau}</div></div>
@@ -3182,28 +3228,27 @@ function renderProfCalendar(sessions) {
     return;
   }
   const today = new Date(); today.setHours(0, 0, 0, 0);
-  const months = [];
-  sessions.forEach(s => { if (!months.includes(s.mois)) months.push(s.mois); });
-  months.sort((a, b) => MOIS_NUM[a] - MOIS_NUM[b]);
-
-  const html = months.map(mois => {
+  const html = moisDuCalendrier(sessions).map(({ annee, mois }) => {
     const mi = MOIS_NUM[mois];
-    let startDow = new Date(CAL_YEAR, mi, 1).getDay();
+    let startDow = new Date(annee, mi, 1).getDay();
     startDow = (startDow + 6) % 7;
-    const daysInMonth = new Date(CAL_YEAR, mi + 1, 0).getDate();
-    const byDay = {};
-    sessions.filter(s => s.mois === mois).forEach(s => { byDay[parseInt(s.date, 10)] = s; });
+    const daysInMonth = new Date(annee, mi + 1, 0).getDate();
+    const byDay = sessionsParJour(sessions, annee, mois);
 
     let cells = '';
     for (let i = 0; i < startDow; i++) cells += `<div class="mv-cell mv-empty"></div>`;
     for (let d = 1; d <= daysInMonth; d++) {
-      const s = byDay[d];
-      if (s) {
-        const mInfo = MATIERE_INFO[s.matiere];
-        const passe = new Date(CAL_YEAR, mi, d) < today;
-        cells += `<div class="mv-cell mv-has" style="border-color:${mInfo.color};${passe ? 'opacity:.6' : ''}" title="${mInfo.label} — ${s.type}">
+      const jourS = byDay[d];
+      if (jourS) {
+        const mInfo = MATIERE_INFO[jourS[0].matiere];
+        const passe = new Date(annee, mi, d) < today;
+        const pastilles = jourS.map(s => {
+          const mi2 = MATIERE_INFO[s.matiere];
+          return `<span class="mv-chip" style="background:${mi2.grad}" title="${mi2.label} — ${s.type}">${mi2.icon} ${s.type}</span>`;
+        }).join('');
+        cells += `<div class="mv-cell mv-has" style="border-color:${mInfo.color};${passe ? 'opacity:.6' : ''}">
           <span class="mv-day">${d}</span>
-          <span class="mv-chip" style="background:${mInfo.grad}">${mInfo.icon} ${s.type}</span>
+          ${pastilles}
           <span class="mv-spots" style="color:${passe ? '#7C3AED' : '#059669'}">${passe ? 'Passé' : 'À venir'}</span>
         </div>`;
       } else {
@@ -3211,7 +3256,7 @@ function renderProfCalendar(sessions) {
       }
     }
     return `<div class="mv-month">
-      <h3 class="mv-title">${MOIS_LABEL[mois] || mois} ${CAL_YEAR}</h3>
+      <h3 class="mv-title">${MOIS_LABEL[mois] || mois} ${annee}</h3>
       <div class="mv-dows"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
       <div class="mv-grid">${cells}</div>
     </div>`;
@@ -3259,7 +3304,7 @@ function salonRoom(r) {
 
 // Date ISO (YYYY-MM-DD) d'une session du calendrier
 function sessionIso(s) {
-  return `${CAL_YEAR}-${String(MOIS_NUM[s.mois] + 1).padStart(2, '0')}-${String(parseInt(s.date, 10)).padStart(2, '0')}`;
+  return s.iso || `${s.annee}-${String(MOIS_NUM[s.mois] + 1).padStart(2, '0')}-${String(parseInt(s.date, 10)).padStart(2, '0')}`;
 }
 
 function renderProfEarnings() {
